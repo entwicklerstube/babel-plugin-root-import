@@ -24,8 +24,10 @@ export default function create(babel) {
         const withoutTilde = path.substring(2, path.length);
         return `${this.root}/${withoutTilde}`;
       }
-
-      return '123';
+      if (typeof path === 'string') {
+        return path;
+      }
+      throw new Error('ERROR: No path passed');
     }
 
     hasTildeInString(string) {
