@@ -1,7 +1,7 @@
 export default function create(babel) {
   class BabelRootImport {
 
-    root = rootPath || process.cwd();
+    root = global.rootPath || process.cwd()
 
     constructor() {
       if (babel) {
