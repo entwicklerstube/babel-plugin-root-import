@@ -1,4 +1,3 @@
-import path from 'path';
 import root from 'app-root-path';
 
 export default function create(babel) {
