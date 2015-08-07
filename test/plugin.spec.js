@@ -4,8 +4,7 @@ describe('Babel Root Import', () => {
   let babelRootImportPlugin, plugin;
 
   beforeEach(() => {
-    babelRootImportPlugin = BabelRootImportPlugin();
-    plugin = new babelRootImportPlugin();
+    plugin = BabelRootImportPlugin();
   });
 
   describe('Class', () => {
@@ -15,13 +14,13 @@ describe('Babel Root Import', () => {
     });
   });
 
-  describe('transformRelativeToRootImport', () => {
+  describe('transformRelativeToRootPath', () => {
     it('returns a string', () => {
-      const func = plugin.transformRelativeToRootImport();
+      const func = plugin.transformRelativeToRootPath();
       expect(func).to.be.a('string');
     });
 
-    it.only('transforms given path relative root-path', () => {
+    it('transforms given path relative root-path', () => {
       const rootPath = `${process.cwd()}/some/path`;
       const result = plugin.transformRelativeToRootPath('~/some/path');
       expect(result).to.equal(rootPath);
