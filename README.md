@@ -19,8 +19,8 @@ Add a `.babelrc` file and write:
 ## Example
 ```javascript
 // Without Plugin
-import SomeExample '../../../folder/file.js';
+import SomeExample from '../../../folder/file.js';
 
 // Now
-import SomeExample '~/folder/file.js';
+import SomeExample from '~/folder/file.js';
 ```
