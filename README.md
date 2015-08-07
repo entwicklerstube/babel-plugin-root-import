@@ -8,7 +8,7 @@ npm install babel-root-import
 
 ## Use
 Add a `.babelrc` file and write:
-```
+```javascript
 {
   "plugins": [
       "babel-root-import"
@@ -18,9 +18,9 @@ Add a `.babelrc` file and write:
 
 ## Example
 ```javascript
-// Without Plugin
+// Usually
 import SomeExample from '../../../folder/file.js';
 
-// Now
+// With Babel-Root-Importer
 import SomeExample from '~/folder/file.js';
 ```
