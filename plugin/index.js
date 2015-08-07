@@ -1,16 +1,15 @@
 export default function create(babel) {
-
   class BabelRootImport {
 
-    root = root_path || process.cwd();
+    root = rootPath || process.cwd();
 
     constructor() {
-      if(babel) {
+      if (babel) {
         return new babel.Transformer('babel-root-import', {
-          ImportDeclaration: (node, parent) => {
+          ImportDeclaration: (node) => {
             const givenPath = node.source.value;
 
-            if(this.hasTildeInString(givenPath)) {
+            if (this.hasTildeInString(givenPath)) {
               node.source.value = this.transformRelativeToRootPath(node.source.value);
             }
 
@@ -21,9 +20,7 @@ export default function create(babel) {
     }
 
     transformRelativeToRootPath(path) {
-      let transformedPath;
-
-      if(this.hasTildeInString(path)) {
+      if (this.hasTildeInString(path)) {
         const withoutTilde = path.substring(2, path.length);
         return `${this.root}/${withoutTilde}`;
       }
@@ -34,9 +31,9 @@ export default function create(babel) {
     hasTildeInString(string) {
       let containsTilde = false;
 
-      if(typeof string === 'string') {
+      if (typeof string === 'string') {
         const firstTwoCharactersOfString = string.substring(0, 2);
-        if(firstTwoCharactersOfString === '~/') {
+        if (firstTwoCharactersOfString === '~/') {
           containsTilde = true;
         }
       }
