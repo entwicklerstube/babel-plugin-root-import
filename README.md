@@ -19,8 +19,8 @@ Add a `.babelrc` file and write:
 ## Example
 ```javascript
 // Usually
-import SomeExample from '../../../folder/file.js';
+import SomeExample from '../../../some/example.js';
 
 // With Babel-Root-Importer
-import SomeExample from '~/folder/file.js';
+import SomeExample from '~/some/example.js';
 ```
