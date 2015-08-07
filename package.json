@@ -7,7 +7,8 @@
     "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel/register",
     "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel/register --watch",
     "pack": "webpack --config config/webpack.js",
-    "prepublish": "npm run pack"
+    "prepublish": "npm run pack",
+    "lint-js": "eslint plugin"
   },
   "author": "Michael J. Zoidl <github@michaelzoidl.com>",
   "license": "MIT",
@@ -16,7 +17,9 @@
     "babel": "^5.8.21",
     "chai": "^3.2.0",
     "mocha": "^2.2.5",
-    "sinon": "^1.15.4"
+    "sinon": "^1.15.4",
+    "babel-eslint": "^3.1.20",
+    "eslint": "^0.24.0"
   },
   "devDependencies": {
     "babelify": "^6.1.3"
