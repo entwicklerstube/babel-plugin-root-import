@@ -1,21 +1,34 @@
-import root from 'app-root-path';
-
 export default function create(babel) {
 
   class BabelRootImport {
 
-    root = root.path;
+    root = root_path || process.cwd();
 
-    constructor(babel) {
-      // return new babel.Transformer("babel-plugin-project-relative-require", {
-      //   ImportDeclaration: function(node, parent) {
-      //
-      //   };
-      // };
+    constructor() {
+      if(babel) {
+        return new babel.Transformer('babel-root-import', {
+          ImportDeclaration: (node, parent) => {
+            const givenPath = node.source.value;
+
+            if(this.hasTildeInString(givenPath)) {
+              node.source.value = this.transformRelativeToRootPath(node.source.value);
+            }
+
+            return node;
+          }
+        });
+      }
     }
 
-    transformRelativeToRootImport() {
-      return '';
+    transformRelativeToRootPath(path) {
+      let transformedPath;
+
+      if(this.hasTildeInString(path)) {
+        const withoutTilde = path.substring(2, path.length);
+        return `${this.root}/${withoutTilde}`;
+      }
+
+      return '123';
     }
 
     hasTildeInString(string) {
@@ -32,5 +45,5 @@ export default function create(babel) {
     }
   }
 
-  return BabelRootImport;
+  return new BabelRootImport();
 }
