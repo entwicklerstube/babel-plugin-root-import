@@ -16,7 +16,7 @@ describe('Babel Root Import', () => {
 
   describe('transformRelativeToRootPath', () => {
     it('returns a string', () => {
-      const func = plugin.transformRelativeToRootPath();
+      const func = plugin.transformRelativeToRootPath('');
       expect(func).to.be.a('string');
     });
 
@@ -24,6 +24,12 @@ describe('Babel Root Import', () => {
       const rootPath = `${process.cwd()}/some/path`;
       const result = plugin.transformRelativeToRootPath('~/some/path');
       expect(result).to.equal(rootPath);
+    });
+
+    it('throws error if no string is passed', () => {
+      expect(() => {
+        plugin.transformRelativeToRootPath();
+      }).to.throw(Error);
     });
   });
 
