@@ -9,3 +9,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Implemented ESlint
 
 [1.0.1]: https://github.com/michaelzoidl/babel-root-import/compare/cdfc12949f64c3625b14380e79aa78d8144929e3...1.0.1
+[unreleased]: https://github.com/michaelzoidl/babel-root-import/compare/1.0.1...HEAD
