@@ -8,6 +8,15 @@ Babel plugin to add the opportunity to use `import` with root based paths.
 [![Codacy Badge](https://img.shields.io/codacy/98f77bcc84964e67a2754e563b962d27.svg)](https://www.codacy.com/app/me_1438/both-io)
 [![devDependency Status](https://david-dm.org/michaelzoidl/babel-root-import/dev-status.svg)](https://david-dm.org/michaelzoidl/babel-root-import#info=devDependencies)
 
+## Example
+```javascript
+// Usually
+import SomeExample from '../../../some/example.js';
+
+// With Babel-Root-Importer
+import SomeExample from '~/some/example.js';
+```
+
 ## Install
 ```
 npm install babel-root-import --save-dev
@@ -25,15 +34,6 @@ Add a `.babelrc` file and write:
 or pass the plugin with the plugins-flag on CLI
 ```
 babel --plugins babel-root-import
-```
-
-## Example
-```javascript
-// Usually
-import SomeExample from '../../../some/example.js';
-
-// With Babel-Root-Importer
-import SomeExample from '~/some/example.js';
 ```
 
 ### Thanks
