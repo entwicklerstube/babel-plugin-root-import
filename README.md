@@ -33,7 +33,7 @@ Add a `.babelrc` file and write:
 ```
 or pass the plugin with the plugins-flag on CLI
 ```
-babel --plugins babel-root-import
+babel-node myfile.js --plugins babel-root-import
 ```
 
 ### Thanks
