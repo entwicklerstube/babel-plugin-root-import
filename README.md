@@ -10,7 +10,7 @@ Babel plugin to add the opportunity to use `import` with root based paths.
 
 ## Install
 ```
-npm install babel-root-import
+npm install babel-root-import --save-dev
 ```
 
 ## Use
