@@ -2,7 +2,7 @@
 Babel plugin to add the opportunity to use `import` with root based paths.
 
 ![](https://img.shields.io/badge/unicorn-approved-blue.svg)
-[![License][http://img.shields.io/badge/license-MIT-brightgreen.svg]][http://twada.mit-license.org/2014-2015]
+![http://twada.mit-license.org/2014-2015](http://img.shields.io/badge/license-MIT-brightgreen.svg)
 [![Gratipay](http://img.shields.io/gratipay/michaelzoidl.svg)](https://gratipay.com/michaelzoidl/)
 [![Build Status](https://travis-ci.org/michaelzoidl/babel-root-import.svg?branch=master)](https://travis-ci.org/michaelzoidl/babel-root-import)
 [![Codacy Badge](https://img.shields.io/codacy/98f77bcc84964e67a2754e563b962d27.svg)](https://www.codacy.com/app/me_1438/both-io)
