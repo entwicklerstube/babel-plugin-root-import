@@ -36,5 +36,4 @@ or pass the plugin with the plugins-flag on CLI
 babel-node myfile.js --plugins babel-root-import
 ```
 
-### Thanks
 Thanks [brigand](https://github.com/brigand) for giving me some [inspiration](http://stackoverflow.com/a/31069137/1624739)
