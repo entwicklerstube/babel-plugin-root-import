@@ -12,6 +12,9 @@
   },
   "author": "Michael J. Zoidl <github@michaelzoidl.com>",
   "license": "MIT",
+  "dependencies": {
+    "babel": "^5.8.21"
+  },
   "devDependencies": {
     "babel": "^5.8.21",
     "babel-eslint": "^3.1.20",
