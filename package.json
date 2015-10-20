@@ -1,8 +1,11 @@
 {
   "name": "babel-root-import",
   "version": "1.0.1",
-  "description": "",
+  "description": "Babel Plugin to enable relative root-import",
+  "author": "Michael J. Zoidl <github@michaelzoidl.com>",
+  "license": "MIT",
   "main": "index.js",
+  "repository": "michaelzoidl/babel-root-import",
   "scripts": {
     "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel/register",
     "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel/register --watch",
@@ -10,8 +13,6 @@
     "prepublish": "npm run pack",
     "lint-js": "eslint plugin"
   },
-  "author": "Michael J. Zoidl <github@michaelzoidl.com>",
-  "license": "MIT",
   "dependencies": {
     "babel": "^5.8.21"
   },
