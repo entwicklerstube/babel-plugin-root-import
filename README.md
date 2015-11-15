@@ -38,7 +38,7 @@ babel-node myfile.js --plugins babel-root-import
 ## Change Log
 
 ## [2.0.1] - 2015-11-15
-⚠ Breaking Change to Babel 5
+:warning: Breaking Change to Babel 5
 - Updated to Babel 6
 - Added integration tests
 
