@@ -7,19 +7,18 @@
   "main": "index.js",
   "repository": "michaelzoidl/babel-root-import",
   "scripts": {
-    "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel/register",
-    "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel/register --watch",
+    "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
+    "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register --watch",
     "pack": "webpack --config config/webpack.js",
     "prepublish": "npm run pack",
     "lint-js": "eslint plugin"
   },
   "dependencies": {
-    "babel": "^5.8.21"
+    "babel": "^6.1.18"
   },
   "devDependencies": {
-    "babel": "^5.8.21",
     "babel-eslint": "^4.0.6",
-    "babelify": "^6.1.3",
+    "babelify": "^6.4.0",
     "chai": "^3.2.0",
     "eslint": "^1.1.0",
     "mocha": "^2.2.5",
