@@ -36,13 +36,12 @@ babel-node myfile.js --plugins babel-root-import
 ```
 
 ## Change Log
-
-## [2.0.1] - 2015-11-15
-⚠ Breaking Change to Babel 5
+#### 2.0.1 - 2015-11-15
+:warning: Breaking Change to Babel 5
 - Updated to Babel 6
 - Added integration tests
 
-## [1.0.1] - 2015-08-07
+#### 1.0.1 - 2015-08-07
 - Added / updated tests
 - Implemented ESlint
 
