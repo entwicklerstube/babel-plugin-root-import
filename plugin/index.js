@@ -1,12 +1,19 @@
+import path from 'path';
+
 export default function create(babel) {
+  const pluginName = 'babel-root-import';
+
   class BabelRootImport {
 
-    root = global.rootPath || process.cwd()
-
+    root = global.rootPath || process.cwd();
     constructor() {
       if (babel) {
-        return new babel.Transformer('babel-root-import', {
-          ImportDeclaration: (node) => {
+        return new babel.Transformer(pluginName, {
+          ImportDeclaration: (node, parent, scope, config) => {
+            const pluginConf = config.opts.extra[pluginName] || {};
+            if (pluginConf.root) {
+              this.root = path.join(global.rootPath, pluginConf.root);
+            }
             const givenPath = node.source.value;
 
             if (this.hasTildeInString(givenPath)) {
