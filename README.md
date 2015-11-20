@@ -25,11 +25,21 @@ npm install babel-root-import --save-dev
 Add a `.babelrc` file and write:
 ```javascript
 {
+  "stage": 0,
+  "optional": ["runtime"],
   "plugins": [
       "babel-root-import"
-  ]
+  ],
+  "extra": {
+    "babel-root-import":{
+      "root": "build"
+    }
+  }
 }
 ```
+
+> The `root` option allow to specify where to find the code built by babel.
+
 or pass the plugin with the plugins-flag on CLI
 ```
 babel-node myfile.js --plugins babel-root-import
