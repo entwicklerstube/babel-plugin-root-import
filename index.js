@@ -1,2 +1,2 @@
 global.rootPath = process.cwd();
-module.exports = require('./lib/babel-root-import.js');
+module.exports = require('./build/index.js');
