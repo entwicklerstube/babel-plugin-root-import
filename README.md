@@ -1,6 +1,7 @@
 # Babel Root Import
 Babel plugin to add the opportunity to use `import` with root based paths.
-
+Current-Version: 3.0.0<br>
+Supported Babel-Version: 6.X.XX
 [![Build Status](https://travis-ci.org/michaelzoidl/babel-root-import.svg?branch=master)](https://travis-ci.org/michaelzoidl/babel-root-import)
 [![Codacy Badge](https://img.shields.io/codacy/98f77bcc84964e67a2754e563b962d27.svg)](https://www.codacy.com/app/me_1438/both-io)
 [![Dependency Status](https://david-dm.org/michaelzoidl/babel-root-import.svg)](https://david-dm.org/michaelzoidl/babel-root-import)
@@ -26,7 +27,7 @@ Add a `.babelrc` file and write:
 ```javascript
 {
   "plugins": [
-      "babel-root-import"
+    "babel-root-import"
   ]
 }
 ```
@@ -36,14 +37,16 @@ babel-node myfile.js --plugins babel-root-import
 ```
 
 ## Change Log
+#### 3.0.0 - 2015-11-30
+- Updated plugin to new babel6 API
+- Splitted tests and functions into two scopes with single tests
+- Removed the "extra-root" param for the .babelrc since this is no yet supported in babel6
+
 #### 2.0.1 - 2015-11-15
-:warning: Breaking Change to Babel 5
+Breaking Change to Babel 5
 - Updated to Babel 6
 - Added integration tests
 
 #### 1.0.1 - 2015-08-07
 - Added / updated tests
 - Implemented ESlint
-
-
-Thanks [brigand](https://github.com/brigand) for giving me some [inspiration](http://stackoverflow.com/a/31069137/1624739)
