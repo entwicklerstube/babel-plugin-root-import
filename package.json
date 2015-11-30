@@ -5,6 +5,10 @@
   "author": "Michael J. Zoidl <github@michaelzoidl.com>",
   "license": "MIT",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "build"
+  ],
   "repository": "michaelzoidl/babel-root-import",
   "scripts": {
     "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
