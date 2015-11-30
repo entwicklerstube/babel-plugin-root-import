@@ -10,6 +10,7 @@
     "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
     "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register --watch",
     "pack": "webpack --config config/webpack.js",
+    "prepublish": "npm run compile",
     "lint-js": "eslint plugin",
     "compile": "babel -d build/ plugin/"
   },
