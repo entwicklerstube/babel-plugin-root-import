@@ -34,6 +34,9 @@ or pass the plugin with the plugins-flag on CLI
 babel-node myfile.js --plugins babel-root-import
 ```
 
+## Motivate
+If you like this project just give it a star :) I like stars.
+
 ## Change Log
 #### 3.0.0 - 2015-11-30
 - Updated plugin to new babel6 API
