@@ -28,6 +28,12 @@ Add a `.babelrc` file and write:
     "babel-root-import"
   ]
 }
+//or, if all your scripts in 'src/js' folder:
+{
+  "plugins": [
+    ["babel-root-import", {"rootPathSuffix": "src/js"}]
+  ]
+}
 ```
 or pass the plugin with the plugins-flag on CLI
 ```
