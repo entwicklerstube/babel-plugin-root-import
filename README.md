@@ -35,8 +35,8 @@ babel-node myfile.js --plugins babel-root-import
 ```
 
 ## Extras
-If you want a custom root you can define this in your `.babelrc` file:
-```
+If you want a custom root because for example all your files are in the src/js folder you can define this in your `.babelrc` file
+```javascript
 {
   "plugins": [
     ["babel-root-import", {
