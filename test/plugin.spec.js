@@ -11,5 +11,18 @@ describe('Babel Root Import - Plugin', () => {
 
       expect(transformedCode.code).to.contain(targetRequire);
     });
+
+    it('transforms the relative path into an absolute path with the configured root-path', () => {
+      const targetRequire = `some/custom/root/some/example.js`;
+      const transformedCode = babel.transform("import SomeExample from '~/some/example.js';", {
+        plugins: [[
+          BabelRootImportPlugin, {
+            rootPathSuffix: 'some/custom/root'
+          }
+        ]]
+      });
+
+      expect(transformedCode.code).to.contain(targetRequire);
+    });
   });
 });
