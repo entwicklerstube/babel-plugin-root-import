@@ -50,7 +50,10 @@ If you want a custom root because for example all your files are in the src/js f
 If you like this project just give it a star :) I like stars.
 
 ## Change Log
-#### 3.0.0 - 2015-11-30
+#### 3.1.0 - 2015-12-01
+- Add possibility config the custom root path
+
+#### 3.0.1 - 2015-11-30
 - Updated plugin to new babel6 API
 - Splitted tests and functions into two scopes with single tests
 - Removed the "extra-root" param for the .babelrc since this is no yet supported in babel6
