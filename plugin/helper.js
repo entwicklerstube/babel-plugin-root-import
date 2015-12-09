@@ -3,10 +3,10 @@ export default function(path) {
 
     root = global.rootPath || process.cwd()
 
-    transformRelativeToRootPath(path) {
+    transformRelativeToRootPath(path, rootPathSuffix) {
       if (this.hasTildeInString(path)) {
         const withoutTilde = path.substring(2, path.length);
-        return `${this.root}/${withoutTilde}`;
+        return `${this.root}${rootPathSuffix}/${withoutTilde}`;
       }
       if (typeof path === 'string') {
         return path;
