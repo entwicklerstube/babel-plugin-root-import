@@ -28,16 +28,22 @@ Add a `.babelrc` file and write:
     "babel-root-import"
   ]
 }
-//or, if all your scripts in 'src/js' folder:
-{
-  "plugins": [
-    ["babel-root-import", {"rootPathSuffix": "src/js"}]
-  ]
-}
 ```
 or pass the plugin with the plugins-flag on CLI
 ```
 babel-node myfile.js --plugins babel-root-import
+```
+
+## Extras
+If you want a custom root you can define this in your `.babelrc` file:
+```
+{
+  "plugins": [
+    ["babel-root-import", {
+      "rootPathSuffix": "src/js"
+    }]
+  ]
+}
 ```
 
 ## Motivate
