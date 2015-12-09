@@ -6,10 +6,15 @@ export default function({ types: t }) {
       const that = this;
       return {
         visitor: {
-          ImportDeclaration(path) {
+          ImportDeclaration(path, state) {
             const givenPath = path.node.source.value;
+
+            var rootPathSuffix = state && state.opts && typeof state.opts.rootPathSuffix === 'string' ?
+            '/' + state.opts.rootPathSuffix.replace(/^(\/)|(\/)$/g, '') :
+                '';
+
             if(BabelRootImportHelper().hasTildeInString(givenPath)) {
-              path.node.source.value = BabelRootImportHelper().transformRelativeToRootPath(path.node.source.value);
+              path.node.source.value = BabelRootImportHelper().transformRelativeToRootPath(givenPath, rootPathSuffix);
             }
           }
         }
