@@ -9,12 +9,10 @@ export default function({ types: t }) {
           ImportDeclaration(path, state) {
             const givenPath = path.node.source.value;
 
-            var rootPathSuffix = state && state.opts && typeof state.opts.rootPathSuffix === 'string' ?
-            '/' + state.opts.rootPathSuffix.replace(/^(\/)|(\/)$/g, '') :
-                '';
+            var rootPathSuffix = state && state.opts && typeof state.opts.rootPathSuffix === 'string' ? state.opts.rootPathSuffix : '';
 
-            if(BabelRootImportHelper().hasTildeInString(givenPath)) {
-              path.node.source.value = BabelRootImportHelper().transformRelativeToRootPath(givenPath, rootPathSuffix);
+            if(BabelRootImportHelper().startsWith(givenPath, '~/')) {
+              path.node.source.value = BabelRootImportHelper().transformRelativeToRootPath(givenPath, state.file.opts.filename, rootPathSuffix);
             }
           }
         }
