@@ -14,10 +14,12 @@
     "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
     "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register --watch",
     "lint-js": "eslint plugin",
-    "compile": "babel -d build/ plugin/"
+    "compile": "$(npm bin -g)/babel -d build/ plugin/",
+    "compile-watch": "$(npm bin -g)/babel -d build/ plugin/ -w"
   },
   "dependencies": {
-    "babel": "^6.1.18"
+    "babel": "^6.1.18",
+    "find-pkg": "^0.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.2.1",
