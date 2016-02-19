@@ -1,20 +1,30 @@
 import BabelRootImportHelper from './helper';
 
-export default function({ types: t }) {
+export default function() {
   class BabelRootImport {
     constructor() {
-      const that = this;
       return {
-        visitor: {
+        'visitor': {
           ImportDeclaration(path, state) {
-            const givenPath = path.node.source.value;
+            const defaultPath = path.node.source.value;
 
-            var rootPathSuffix = state && state.opts && typeof state.opts.rootPathSuffix === 'string' ?
-            '/' + state.opts.rootPathSuffix.replace(/^(\/)|(\/)$/g, '') :
-                '';
+            let rootPathSuffix = '';
+            let rootPathPrefix = '';
 
-            if(BabelRootImportHelper().hasTildeInString(givenPath)) {
-              path.node.source.value = BabelRootImportHelper().transformRelativeToRootPath(givenPath, rootPathSuffix);
+            if (state && state.opts) {
+              if (state.opts.rootPathSuffix && typeof state.opts.rootPathSuffix === 'string') {
+                rootPathSuffix = state.opts.rootPathSuffix.replace(/^(\/)|(\/)$/g, '');
+              }
+
+              if (state.opts.rootPathPrefix && typeof state.opts.rootPathPrefix === 'string') {
+                rootPathPrefix = state.opts.rootPathPrefix;
+              } else {
+                rootPathPrefix = '~';
+              }
+            }
+
+            if (BabelRootImportHelper().hasRootPathPrefixInString(defaultPath, rootPathPrefix)) {
+              path.node.source.value = BabelRootImportHelper().transformRelativeToRootPath(defaultPath, rootPathSuffix, rootPathPrefix);
             }
           }
         }

@@ -24,5 +24,44 @@ describe('Babel Root Import - Plugin', () => {
 
       expect(transformedCode.code).to.contain(targetRequire);
     });
+
+    it('uses the "@" as custom prefix to detect a root-import path', () => {
+      const targetRequire = `${process.cwd()}/some/example.js`;
+      const transformedCode = babel.transform("import SomeExample from '@/some/example.js';", {
+        plugins: [[
+          BabelRootImportPlugin, {
+            rootPathPrefix: '@'
+          }
+        ]]
+      });
+
+      expect(transformedCode.code).to.contain(targetRequire);
+    });
+
+    it('uses the "/" as custom prefix to detect a root-import path', () => {
+      const targetRequire = `${process.cwd()}/some/example.js`;
+      const transformedCode = babel.transform("import SomeExample from '/some/example.js';", {
+        plugins: [[
+          BabelRootImportPlugin, {
+            rootPathPrefix: '/'
+          }
+        ]]
+      });
+
+      expect(transformedCode.code).to.contain(targetRequire);
+    });
+
+    it('uses the "–" as custom prefix to detect a root-import path', () => {
+      const targetRequire = `${process.cwd()}/some/example.js`;
+      const transformedCode = babel.transform("import SomeExample from '-/some/example.js';", {
+        plugins: [[
+          BabelRootImportPlugin, {
+            rootPathPrefix: '-'
+          }
+        ]]
+      });
+
+      expect(transformedCode.code).to.contain(targetRequire);
+    });
   });
 });

@@ -48,22 +48,22 @@ describe('Babel Root Import - Helper', () => {
     });
   });
 
-  describe('hasTildeInString', () => {
+  describe('hasRootPathPrefixInString', () => {
     it('returns a boolean', () => {
-      const func = BabelRootImportHelper().hasTildeInString();
+      const func = BabelRootImportHelper().hasRootPathPrefixInString();
       expect(func).to.be.a('boolean');
     });
 
-    it('check if a "~/" is at the beginning of the string', () => {
-      const withoutTilde = BabelRootImportHelper().hasTildeInString('some/path');
-      const withTilde = BabelRootImportHelper().hasTildeInString('~/some/path');
-      expect(withoutTilde).to.be.false;
-      expect(withTilde).to.be.true;
+    it('check if "~/" is at the beginning of the string', () => {
+      const withoutRootPathPrefix = BabelRootImportHelper().hasRootPathPrefixInString('some/path');
+      const withRootPathPrefix = BabelRootImportHelper().hasRootPathPrefixInString('~/some/path');
+      expect(withoutRootPathPrefix).to.be.false;
+      expect(withRootPathPrefix).to.be.true;
     });
 
     it('returns false if no string is passed', () => {
-      const nothingPassed = BabelRootImportHelper().hasTildeInString();
-      const wrongTypePassed = BabelRootImportHelper().hasTildeInString([]);
+      const nothingPassed = BabelRootImportHelper().hasRootPathPrefixInString();
+      const wrongTypePassed = BabelRootImportHelper().hasRootPathPrefixInString([]);
       expect(nothingPassed).to.be.false;
       expect(wrongTypePassed).to.be.false;
     });
