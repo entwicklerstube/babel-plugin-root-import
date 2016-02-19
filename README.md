@@ -35,6 +35,7 @@ babel-node myfile.js --plugins babel-root-import
 ```
 
 ## Extras
+### Custom root-path-suffix
 If you want a custom root because for example all your files are in the src/js folder you can define this in your `.babelrc` file
 ```javascript
 {
@@ -45,6 +46,19 @@ If you want a custom root because for example all your files are in the src/js f
   ]
 }
 ```
+
+### Custom root-path-prefix
+If you don't like the `~` syntax you can just use your own symbole (for example a @ symbole)
+```javascript
+{
+  "plugins": [
+    ["babel-root-import", {
+      "rootPathPrefix": "@"
+    }]
+  ]
+}
+```
+
 
 ## Motivate
 If you like this project just give it a star :) I like stars.
