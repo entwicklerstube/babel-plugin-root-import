@@ -48,7 +48,7 @@ If you want a custom root because for example all your files are in the src/js f
 ```
 
 ### Custom root-path-prefix
-If you don't like the `~` syntax you can just use your own symbole (for example a @ symbole)
+If you don't like the `~` syntax you can just use your own symbole (for example a `@` symbole or `\`)
 ```javascript
 {
   "plugins": [
@@ -57,6 +57,11 @@ If you don't like the `~` syntax you can just use your own symbole (for example 
     }]
   ]
 }
+
+// Now you can use the plugin like:
+import foo from '@/my-file';
+// or
+import foo from '/my-file';
 ```
 
 
