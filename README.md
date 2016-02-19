@@ -60,8 +60,6 @@ If you don't like the `~` syntax you can just use your own symbole (for example 
 
 // Now you can use the plugin like:
 import foo from '@/my-file';
-// or
-import foo from '/my-file';
 ```
 
 
