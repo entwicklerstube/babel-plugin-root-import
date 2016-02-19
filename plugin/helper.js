@@ -6,7 +6,6 @@ export default function() {
     root = global.rootPath || process.cwd()
 
     transformRelativeToRootPath(importPath, rootPathSuffix, rootPathPrefix) {
-
       let withoutRootPathPrefix = '';
       if (this.hasRootPathPrefixInString(importPath, rootPathPrefix)) {
         if (importPath.substring(0, 1) === '/') {
