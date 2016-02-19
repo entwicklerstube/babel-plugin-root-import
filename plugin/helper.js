@@ -1,3 +1,5 @@
+import slash from 'slash';
+
 export default function() {
   class BabelRootImportHelper {
 
@@ -12,7 +14,7 @@ export default function() {
         } else {
           withoutRootPathPrefix = importPath.substring(2, importPath.length);
         }
-        return `${this.root}${rootPathSuffix ? rootPathSuffix : ''}/${withoutRootPathPrefix}`;
+        return `${slash(this.root)}${rootPathSuffix ? rootPathSuffix : ''}/${withoutRootPathPrefix}`;
       }
 
       if (typeof importPath === 'string') {
