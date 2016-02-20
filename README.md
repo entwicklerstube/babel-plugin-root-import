@@ -67,6 +67,9 @@ import foo from '@/my-file';
 If you like this project just give it a star :) I like stars.
 
 ## Change Log
+#### 3.2.1 - 2016-02-20
+- Fix custom suffix in path, missing `/` in generated paths
+
 #### 3.2.0 - 2016-02-19
 - Support [Windows-Filesystem](http://superuser.com/questions/176388/why-does-windows-use-backslashes-for-paths-and-unix-forward-slashes/176395#176395)
 - Add possibility to configure a custom rootPath-Symbole (instead of `~` you can use whatever you like)
