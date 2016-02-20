@@ -13,7 +13,7 @@ export default function() {
 
             if (state && state.opts) {
               if (state.opts.rootPathSuffix && typeof state.opts.rootPathSuffix === 'string') {
-                rootPathSuffix = state.opts.rootPathSuffix.replace(/^(\/)|(\/)$/g, '');
+                rootPathSuffix = `/${state.opts.rootPathSuffix.replace(/^(\/)|(\/)$/g, '')}`;
               }
 
               if (state.opts.rootPathPrefix && typeof state.opts.rootPathPrefix === 'string') {
