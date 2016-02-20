@@ -2,10 +2,6 @@ import BabelRootImportPlugin from '../plugin';
 import * as babel from 'babel-core';
 
 describe('Babel Root Import - Plugin', () => {
-
-  before(setupPath);
-  after(resetPath);
-
   describe('Babel Plugin', () => {
     it('transforms the relative path into an absolute path', () => {
       const targetRequire = `${process.cwd()}/some/example.js`;
@@ -61,6 +57,20 @@ describe('Babel Root Import - Plugin', () => {
         plugins: [[
           BabelRootImportPlugin, {
             rootPathPrefix: '-'
+          }
+        ]]
+      });
+
+      expect(transformedCode.code).to.contain(targetRequire);
+    });
+
+    it('uses "@" as custom prefix to detect a root-import path and has a custom rootPathSuffix', () => {
+      const targetRequire = `${process.cwd()}/some/example.js`;
+      const transformedCode = babel.transform("import SomeExample from '@/example.js';", {
+        plugins: [[
+          BabelRootImportPlugin, {
+            rootPathPrefix: '@',
+            rootPathSuffix: 'some'
           }
         ]]
       });
