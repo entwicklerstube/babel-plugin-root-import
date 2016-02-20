@@ -67,7 +67,7 @@ import foo from '@/my-file';
 If you like this project just give it a star :) I like stars.
 
 ## Change Log
-#### 3.2.1 - 2016-02-20
+#### 3.2.2 - 2016-02-20
 - Fix custom suffix in path, missing `/` in generated paths
 
 #### 3.2.0 - 2016-02-19
