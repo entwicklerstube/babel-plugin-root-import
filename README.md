@@ -40,9 +40,9 @@ If you want a custom root because for example all your files are in the src/js f
 ```javascript
 {
   "plugins": [
-    [["babel-root-import", {
+    ["babel-root-import", {
       "rootPathSuffix": "src/js"
-    }]]
+    }]
   ]
 }
 ```
@@ -52,9 +52,9 @@ If you don't like the `~` syntax you can just use your own symbole (for example 
 ```javascript
 {
   "plugins": [
-    [["babel-root-import", {
+    ["babel-root-import", {
       "rootPathPrefix": "@"
-    }]]
+    }]
   ]
 }
 
