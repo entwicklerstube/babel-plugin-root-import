@@ -1,11 +1,6 @@
-import path from 'path';
-
 import BabelRootImportHelper from '../plugin/helper';
 
 describe('Babel Root Import - Helper', () => {
-
-  before(setupPath);
-  after(resetPath);
 
   describe('transformRelativeToRootPath', () => {
       it('returns a string', () => {
