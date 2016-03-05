@@ -1,16 +1,17 @@
+import slash from 'slash';
+
 import BabelRootImportHelper from '../plugin/helper';
 
 describe('Babel Root Import - Helper', () => {
 
   describe('transformRelativeToRootPath', () => {
       it('returns a string', () => {
-        console.log(BabelRootImportHelper().transformRelativeToRootPath(''));
         const func = BabelRootImportHelper().transformRelativeToRootPath('');
         expect(func).to.be.a('string');
       });
 
       it('transforms given path relative root-path', () => {
-        const rootPath = `${process.cwd()}/some/path`;
+        const rootPath = slash(`${process.cwd()}/some/path`);
         const result = BabelRootImportHelper().transformRelativeToRootPath('~/some/path');
         expect(result).to.equal(rootPath);
       });
@@ -24,7 +25,7 @@ describe('Babel Root Import - Helper', () => {
 
   describe('Class', () => {
     it('returns the root path', () => {
-      const rootByProcess = process.cwd();
+      const rootByProcess = slash(process.cwd());
       expect(BabelRootImportHelper().root).to.equal(rootByProcess);
     });
   });
@@ -36,7 +37,7 @@ describe('Babel Root Import - Helper', () => {
     });
 
     it('transforms given path relative root-path', () => {
-      const rootPath = `${process.cwd()}/some/path`;
+      const rootPath = slash(`${process.cwd()}/some/path`);
       const result = BabelRootImportHelper().transformRelativeToRootPath('~/some/path');
       expect(result).to.equal(rootPath);
     });

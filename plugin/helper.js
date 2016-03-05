@@ -3,7 +3,7 @@ import slash from 'slash';
 export default function() {
   class BabelRootImportHelper {
 
-    root = global.rootPath || process.cwd()
+    root = slash(global.rootPath || process.cwd())
 
     transformRelativeToRootPath(importPath, rootPathSuffix, rootPathPrefix) {
       let withoutRootPathPrefix = '';
@@ -13,7 +13,7 @@ export default function() {
         } else {
           withoutRootPathPrefix = importPath.substring(2, importPath.length);
         }
-        return `${slash(this.root)}${rootPathSuffix ? rootPathSuffix : ''}/${withoutRootPathPrefix}`;
+        return slash(`${this.root}${rootPathSuffix ? rootPathSuffix : ''}/${withoutRootPathPrefix}`);
       }
 
       if (typeof importPath === 'string') {
