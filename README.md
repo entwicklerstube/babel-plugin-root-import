@@ -25,9 +25,10 @@ Add a `.babelrc` file and write:
 ```javascript
 {
   "plugins": [
-    "babel-root-import"
+    ["babel-root-import"]
   ]
 }
+
 ```
 or pass the plugin with the plugins-flag on CLI
 ```
@@ -61,7 +62,6 @@ If you don't like the `~` syntax you can just use your own symbole (for example 
 // Now you can use the plugin like:
 import foo from '@/my-file';
 ```
-
 
 ## Motivate
 If you like this project just give it a star :) I like stars.
