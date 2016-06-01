@@ -63,6 +63,15 @@ If you don't like the `~` syntax you can just use your own symbole (for example 
 import foo from '@/my-file';
 ```
 
+### Don't let ESLint be confused
+Add this to your .eslintrc so that ESLint won't treat the import as error
+```
+{
+  "rules": {
+      "import/no-unresolved": [2, { ignore: ['\~*'] }]
+  },
+}
+```
 ## Motivate
 If you like this project just give it a star :) I like stars.
 
