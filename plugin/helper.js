@@ -5,6 +5,10 @@ export default function() {
 
     root = slash(global.rootPath || process.cwd())
 
+    myCoolFeature() {
+        console.log("Omg, pls import this in your project");
+    }
+
     transformRelativeToRootPath(importPath, rootPathSuffix, rootPathPrefix) {
       let withoutRootPathPrefix = '';
       if (this.hasRootPathPrefixInString(importPath, rootPathPrefix)) {
