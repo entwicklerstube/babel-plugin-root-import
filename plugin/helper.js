@@ -1,14 +1,23 @@
 import slash from 'slash';
+import resolve from 'resolve';
 
 export default function() {
   class BabelRootImportHelper {
 
-    root = slash(global.rootPath || process.cwd())
+    root = slash(global.rootPath || process.cwd());
 
-    transformRelativeToRootPath(importPath, rootPathSuffix, rootPathPrefix) {
+    transformRelativeToRootPath(importPath, rootPathSuffix, rootPathPrefix = '~') {
       let withoutRootPathPrefix = '';
       if (this.hasRootPathPrefixInString(importPath, rootPathPrefix)) {
-        if (importPath.substring(0, 1) === '/') {
+        if (!rootPathPrefix) {
+          try {
+            if (resolve.sync(importPath, { 'basedir': this.root })) {
+              return importPath;
+            }
+          } catch (e) {
+            withoutRootPathPrefix = importPath;
+          }
+        } else if (importPath.substring(0, 1) === '/') {
           withoutRootPathPrefix = importPath.substring(1, importPath.length);
         } else {
           withoutRootPathPrefix = importPath.substring(2, importPath.length);
@@ -24,20 +33,18 @@ export default function() {
     }
 
     hasRootPathPrefixInString(importPath, rootPathPrefix = '~') {
-      let containsRootPathPrefix = false;
-
       if (typeof importPath === 'string') {
-        if (importPath.substring(0, 1) === rootPathPrefix) {
-          containsRootPathPrefix = true;
+        const firstChar = importPath.substring(0, 1);
+        if (!rootPathPrefix && firstChar !== '.' && firstChar !== '/') {
+          return true;
         }
 
-        const firstTwoCharactersOfString = importPath.substring(0, 2);
-        if (firstTwoCharactersOfString === `${rootPathPrefix}/`) {
-          containsRootPathPrefix = true;
+        if (firstChar === rootPathPrefix) {
+          return true;
         }
       }
 
-      return containsRootPathPrefix;
+      return false;
     }
   }
 
