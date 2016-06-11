@@ -1,6 +1,6 @@
 {
   "name": "babel-root-import",
-  "version": "3.2.2",
+  "version": "3.3.0",
   "description": "Babel Plugin to enable relative root-import",
   "author": "Michael J. Zoidl <github@michaelzoidl.com>",
   "license": "MIT",
@@ -11,23 +11,26 @@
   ],
   "repository": "michaelzoidl/babel-root-import",
   "scripts": {
-    "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
-    "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register --watch",
-    "lint-js": "eslint plugin",
-    "compile": "babel -d build/ plugin/"
+    "lint": "eslint index.js plugin/ test/",
+    "unit": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
+    "unit-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register --watch",
+    "test": "npm run lint && npm run unit",
+    "compile": "babel -d build/ plugin/",
+    "prepublish": "npm run test && npm run compile"
   },
   "dependencies": {
-    "babel": "^6.1.18",
+    "resolve": "^1.1.7",
     "slash": "^1.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.2.1",
-    "babel-eslint": "^5.0.0",
-    "babel-preset-es2015": "^6.1.18",
-    "babel-preset-stage-1": "^6.1.18",
-    "chai": "^3.2.0",
-    "eslint": "^2.1.0",
-    "mocha": "^2.2.5",
-    "sinon": "^1.15.4"
+    "babel-cli": "^6.9.0",
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^6.0.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "chai": "^3.5.0",
+    "eslint": "^2.12.0",
+    "mocha": "^2.5.3",
+    "sinon": "^1.17.4"
   }
 }

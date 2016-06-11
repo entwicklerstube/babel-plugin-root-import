@@ -9,17 +9,15 @@ export default function() {
             const defaultPath = path.node.source.value;
 
             let rootPathSuffix = '';
-            let rootPathPrefix = '';
+            let rootPathPrefix = '~';
 
             if (state && state.opts) {
               if (state.opts.rootPathSuffix && typeof state.opts.rootPathSuffix === 'string') {
                 rootPathSuffix = `/${state.opts.rootPathSuffix.replace(/^(\/)|(\/)$/g, '')}`;
               }
 
-              if (state.opts.rootPathPrefix && typeof state.opts.rootPathPrefix === 'string') {
+              if (state.opts.rootPathPrefix !== undefined) {
                 rootPathPrefix = state.opts.rootPathPrefix;
-              } else {
-                rootPathPrefix = '~';
               }
             }
 
