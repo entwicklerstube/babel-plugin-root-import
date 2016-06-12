@@ -38,6 +38,39 @@ describe('Babel Root Import - Plugin', () => {
     expect(transformedRequire.code).to.contain(targetRequire);
   });
 
+  it('transforms the relative paths into an absolute paths with the configured root-paths', () => {
+    const plugins = [[
+      BabelRootImportPlugin, [{
+        rootPathPrefix: '~',
+        rootPathSuffix: 'some1/custom/root'
+      }, {
+        rootPathPrefix: '@',
+        rootPathSuffix: 'some2/custom/root'
+      }]
+    ]]
+
+    const targetRequire1 = slash(`/some1/custom/root/some/example.js`);
+    const transformedImport1 = babel.transform("import SomeExample from '~/some/example.js';", {
+      plugins
+    });
+    const transformedRequire1 = babel.transform("var SomeExample = require('~/some/example.js');", {
+      plugins
+    });
+
+    const targetRequire2 = slash(`/some2/custom/root/some/example.js`);
+    const transformedImport2 = babel.transform("import SomeExample from '@/some/example.js';", {
+      plugins
+    });
+    const transformedRequire2 = babel.transform("var SomeExample = require('@/some/example.js');", {
+      plugins
+    });
+
+    expect(transformedImport1.code).to.contain(targetRequire1);
+    expect(transformedRequire1.code).to.contain(targetRequire1);
+    expect(transformedImport2.code).to.contain(targetRequire2);
+    expect(transformedRequire2.code).to.contain(targetRequire2);
+  });
+
   it('uses the "@" as custom prefix to detect a root-import path', () => {
     const targetRequire = slash(`${process.cwd()}/some/example.js`);
     const transformedImport = babel.transform("import SomeExample from '@/some/example.js';", {

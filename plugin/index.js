@@ -1,21 +1,26 @@
 import {hasRootPathPrefixInString, transformRelativeToRootPath} from './helper';
 
-const replacePrefix = (path, opts = {}) => {
-  let rootPathSuffix = '';
-  let rootPathPrefix = '';
+const replacePrefix = (path, opts = []) => {
+  const options = [].concat(opts);
 
-  if (opts.rootPathSuffix && typeof opts.rootPathSuffix === 'string') {
-    rootPathSuffix = `/${opts.rootPathSuffix.replace(/^(\/)|(\/)$/g, '')}`;
-  }
+  for (let i = 0; i < options.length; i++) {
+    let rootPathSuffix = '';
+    let rootPathPrefix = '';
+    const option = options[i];
 
-  if (opts.rootPathPrefix && typeof opts.rootPathPrefix === 'string') {
-    rootPathPrefix = opts.rootPathPrefix;
-  } else {
-    rootPathPrefix = '~';
-  }
+    if (option.rootPathSuffix && typeof option.rootPathSuffix === 'string') {
+      rootPathSuffix = `/${option.rootPathSuffix.replace(/^(\/)|(\/)$/g, '')}`;
+    }
 
-  if (hasRootPathPrefixInString(path, rootPathPrefix)) {
-    return transformRelativeToRootPath(path, rootPathSuffix, rootPathPrefix);
+    if (option.rootPathPrefix && typeof option.rootPathPrefix === 'string') {
+      rootPathPrefix = option.rootPathPrefix;
+    } else {
+      rootPathPrefix = '~';
+    }
+
+    if (hasRootPathPrefixInString(path, rootPathPrefix)) {
+      return transformRelativeToRootPath(path, rootPathSuffix, rootPathPrefix);
+    }
   }
 
   return path;
