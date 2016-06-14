@@ -18,7 +18,7 @@ describe('Babel Root Import - Plugin', () => {
   });
 
   it('transforms the relative path into an absolute path with the configured root-path', () => {
-    const targetRequire = slash(`/some/custom/root/some/example.js`);
+    const targetRequire = slash('/some/custom/root/some/example.js');
     const transformedImport = babel.transform("import SomeExample from '~/some/example.js';", {
       plugins: [[
         BabelRootImportPlugin, {
@@ -125,12 +125,19 @@ describe('Babel Root Import - Plugin', () => {
   });
 
   it('transforms a multipart require path with string at the beginning', () => {
-    const targetRequire = slash(`${process.cwd()}/some/' + 'example.js`);
-    const transformedRequire = babel.transform("var SomeExample = require('~/some/' + 'example.js');", {
+    const targetRequire1 = slash(`${process.cwd()}/some/' + 'example.js`);
+    const transformedRequire1 = babel.transform("var SomeExample = require('~/some/' + 'example.js');", {
       plugins: [BabelRootImportPlugin]
     });
 
-    expect(transformedRequire.code).to.contain(targetRequire);
+    expect(transformedRequire1.code).to.contain(targetRequire1);
+
+    const targetRequire2 = slash(`${process.cwd()}/some/' + 'other' + 'example.js`);
+    const transformedRequire2 = babel.transform("var SomeExample = require('~/some/' + 'other' + 'example.js');", {
+      plugins: [BabelRootImportPlugin]
+    });
+
+    expect(transformedRequire2.code).to.contain(targetRequire2);
   });
 
   it('does not transform a multipart require path with variable at the beginning', () => {

@@ -21,6 +21,24 @@ const replacePrefix = (path, opts = {}) => {
   return path;
 };
 
+/**
+ * Recursively traverses binary  expressions to find the first `StringLiteral` if any.
+ * @param  {Object} t           Babel types
+ * @param  {Node} arg           a Babel node
+ * @return {StringLiteral?}
+ */
+const traverseExpression = (t, arg) => {
+  if (t.isStringLiteral(arg)) {
+    return arg;
+  }
+
+  if (t.isBinaryExpression(arg)) {
+    return traverseExpression(t, arg.left);
+  }
+
+  return null;
+};
+
 export default ({'types': t}) => ({
   'visitor': {
     CallExpression(path, state) {
@@ -33,11 +51,9 @@ export default ({'types': t}) => ({
         return;
       }
 
-      const firstArg = args[0];
-      // If the require is `require('~/' + 'blah')` we can still change it
-      if (t.isBinaryExpression(firstArg) && t.isStringLiteral(firstArg.left)) {
-        firstArg.left.value = replacePrefix(firstArg.left.value, state.opts);
-      } else if (t.isLiteral(firstArg)) {
+      const firstArg = traverseExpression(t, args[0]);
+
+      if (firstArg) {
         firstArg.value = replacePrefix(firstArg.value, state.opts);
       }
     },
