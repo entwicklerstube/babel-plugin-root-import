@@ -17,7 +17,6 @@
     "compile": "babel -d build/ plugin/"
   },
   "dependencies": {
-    "babel": "^6.1.18",
     "slash": "^1.0.0"
   },
   "devDependencies": {
