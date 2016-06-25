@@ -65,6 +65,26 @@ If you don't like the `~` syntax you can just use your own symbole (for example 
 import foo from '@/my-file';
 ```
 
+### Multiple custom prefixes and suffixes
+You can supply an array of the above. The plugin will try each prefix/suffix pair in the order they are defined.
+```javascript
+{
+  "plugins": [
+    ["babel-root-import", [{
+      "rootPathPrefix": "~", // `~` is the default so you can remove this if you want
+      "rootPathSuffix": "src/js"
+    }, {
+      "rootPathPrefix": "@",
+      "rootPathSuffix": "other-src/js"
+    }]]
+  ]
+}
+
+// Now you can use the plugin like:
+import foo from '~/my-file';
+const bar = require('@/my-file');
+```
+
 ### Don't let ESLint be confused
 Add this to your .eslintrc so that ESLint won't treat the import as error
 ```
