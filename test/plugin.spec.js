@@ -101,7 +101,7 @@ describe('Babel Root Import - Plugin', () => {
         }
       ]]
     });
-    const transformedExportAll = babel.transform("export * from '@/some/example.js';", {
+    const transformedExportAll = babel.transform("export { named } from '@/some/example.js';", {
       plugins: [[
         BabelRootImportPlugin, {
           rootPathPrefix: '@'
