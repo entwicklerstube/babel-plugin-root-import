@@ -97,6 +97,13 @@ Add this to your .eslintrc so that ESLint won't treat the import as error
 ## Motivate
 If you like this project just give it a star :) I like stars.
 
+## FYI
+Webpack delivers an similar feature built-in, if you want just the alias feature you can it also configure as alias in the resolve module in the webpack-config.
+[Read more](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
+
+Webpack delivers an similar feature, if you just want to prevent end-less import strings you can also define `aliases` in the `resolve` module, at the moment it doesn't support custom/different symboles and multiple/custom suffixes.
+[READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
+
 ## Change Log
 #### 3.2.2 - 2016-02-20
 - Fix custom suffix in path, missing `/` in generated paths
