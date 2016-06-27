@@ -92,6 +92,26 @@ describe('Babel Root Import - Plugin', () => {
     expect(transformedRequire.code).to.contain(targetRequire);
   });
 
+  it('supports re-export syntax (export * from ... or export { named } from ...)', () => {
+    const targetRequire = slash(`${process.cwd()}/some/example.js`);
+    const transformedExportNamed = babel.transform("export * from '@/some/example.js';", {
+      plugins: [[
+        BabelRootImportPlugin, {
+          rootPathPrefix: '@'
+        }
+      ]]
+    });
+    const transformedExportAll = babel.transform("export * from '@/some/example.js';", {
+      plugins: [[
+        BabelRootImportPlugin, {
+          rootPathPrefix: '@'
+        }
+      ]]
+    });
+    expect(transformedExportNamed.code).to.contain(targetRequire);
+    expect(transformedExportAll.code).to.contain(targetRequire);
+  });
+
   it('uses the "/" as custom prefix to detect a root-import path', () => {
     const targetRequire = slash(`${process.cwd()}/some/example.js`);
     const transformedImport = babel.transform("import SomeExample from '/some/example.js';", {

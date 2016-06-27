@@ -64,6 +64,16 @@ export default ({'types': t}) => ({
     },
     ImportDeclaration(path, state) {
       path.node.source.value = replacePrefix(path.node.source.value, state.opts);
+    },
+    ExportNamedDeclaration(path, state) {
+      if (path.node.source) {
+        path.node.source.value = replacePrefix(path.node.source.value, state.opts);
+      }
+    },
+    ExportAllDeclaration(path, state) {
+      if (path.node.source) {
+        path.node.source.value = replacePrefix(path.node.source.value, state.opts);
+      }
     }
   }
 });
