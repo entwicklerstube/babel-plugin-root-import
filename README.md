@@ -98,7 +98,7 @@ Add this to your .eslintrc so that ESLint won't treat the import as error
 If you like this project just give it a star :) I like stars.
 
 ## FYI
-Webpack delivers an similar feature, if you just want to prevent end-less import strings you can also define `aliases` in the `resolve` module, at the moment it doesn't support custom/different symbols and multiple/custom suffixes.
+Webpack delivers a similar feature, if you just want to prevent end-less import strings you can also define `aliases` in the `resolve` module, at the moment it doesn't support custom/different symbols and multiple/custom suffixes.
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
 
 ## Change Log
