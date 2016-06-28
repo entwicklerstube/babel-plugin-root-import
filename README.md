@@ -51,7 +51,7 @@ If you want a custom root because for example all your files are in the src/js f
 ```
 
 ### Custom root-path-prefix
-If you don't like the `~` syntax you can just use your own symbole (for example a `@` symbole or `\`)
+If you don't like the `~` syntax you can just use your own symbol (for example a `@` symbol or `\`)
 ```javascript
 {
   "plugins": [
@@ -98,7 +98,7 @@ Add this to your .eslintrc so that ESLint won't treat the import as error
 If you like this project just give it a star :) I like stars.
 
 ## FYI
-Webpack delivers an similar feature, if you just want to prevent end-less import strings you can also define `aliases` in the `resolve` module, at the moment it doesn't support custom/different symboles and multiple/custom suffixes.
+Webpack delivers an similar feature, if you just want to prevent end-less import strings you can also define `aliases` in the `resolve` module, at the moment it doesn't support custom/different symbols and multiple/custom suffixes.
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
 
 ## Change Log
@@ -107,7 +107,7 @@ Webpack delivers an similar feature, if you just want to prevent end-less import
 
 #### 3.2.0 - 2016-02-19
 - Support [Windows-Filesystem](http://superuser.com/questions/176388/why-does-windows-use-backslashes-for-paths-and-unix-forward-slashes/176395#176395)
-- Add possibility to configure a custom rootPath-Symbole (instead of `~` you can use whatever you like)
+- Add possibility to configure a custom rootPath-Symbol (instead of `~` you can use whatever you like)
 
 #### 3.1.0 - 2015-12-01
 - Add possibility config the custom root path
