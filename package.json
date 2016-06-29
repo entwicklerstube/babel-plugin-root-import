@@ -1,6 +1,6 @@
 {
   "name": "babel-root-import",
-  "version": "3.2.2",
+  "version": "4.0.0",
   "description": "Babel Plugin to enable relative root-import",
   "author": "Michael J. Zoidl <github@michaelzoidl.com>",
   "license": "MIT",

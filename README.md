@@ -102,6 +102,10 @@ Webpack delivers an similar feature, if you just want to prevent end-less import
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
 
 ## Change Log
+#### 4.0.0 - 2016-06-29
+- Almost everything changed, thanks to [@sheepsteak](https://github.com/sheepsteak), [@gingur](https://github.com/gingur), [@olalonde](https://github.com/olalonde)
+
+## Change Log
 #### 3.2.2 - 2016-02-20
 - Fix custom suffix in path, missing `/` in generated paths
 
