@@ -86,11 +86,11 @@ const bar = require('@/my-file');
 ```
 
 ### Don't let ESLint be confused
-Add this to your .eslintrc so that ESLint won't treat the import as error
+If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to ignore root imports. Add the following to your .eslintrc file, replacing `~` with your chosen prefix.
 ```
 {
   "rules": {
-      "import/no-unresolved": [2, { ignore: ['\~*'] }]
+      "import/no-unresolved": [2, { "ignore": ["^[~]"] }]
   },
 }
 ```
