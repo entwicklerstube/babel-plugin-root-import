@@ -94,18 +94,18 @@ If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-imp
   },
 }
 ```
-## Motivate
-If you like this project just give it a star :) I like stars.
 
 ## FYI
 Webpack delivers a similar feature, if you just want to prevent end-less import strings you can also define `aliases` in the `resolve` module, at the moment it doesn't support custom/different symbols and multiple/custom suffixes.
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
 
 ## Change Log
+#### 4.1.0 - 2016-08-20
+- Use relative paths instead of absolute ones (thanks to @nescalante)
+
 #### 4.0.0 - 2016-06-29
 - Almost everything changed, thanks to [@sheepsteak](https://github.com/sheepsteak), [@gingur](https://github.com/gingur), [@olalonde](https://github.com/olalonde)
 
-## Change Log
 #### 3.2.2 - 2016-02-20
 - Fix custom suffix in path, missing `/` in generated paths
 
