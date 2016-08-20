@@ -7,9 +7,9 @@ describe('helper#transformRelativeToRootPath', () => {
     expect(func).to.be.a('string');
   });
 
-  it('transforms given path relative root-path', () => {
-    const rootPath = slash(`${process.cwd()}/some/path`);
-    const result = transformRelativeToRootPath('~/some/path');
+  it('transforms given path relative path', () => {
+    const rootPath = slash(`./path`);
+    const result = transformRelativeToRootPath('~/some/path', '', '~', 'some/file.js');
     expect(result).to.equal(rootPath);
   });
 
