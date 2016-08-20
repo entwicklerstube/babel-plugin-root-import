@@ -101,7 +101,7 @@ Webpack delivers a similar feature, if you just want to prevent end-less import 
 
 ## Change Log
 #### 4.1.0 - 2016-08-20
-- Use relative paths instead of absolute ones (thanks to @nescalante)
+- Use relative paths instead of absolute ones (thanks to [@nescalante](https://github.com/nescalante))
 
 #### 4.0.0 - 2016-06-29
 - Almost everything changed, thanks to [@sheepsteak](https://github.com/sheepsteak), [@gingur](https://github.com/gingur), [@olalonde](https://github.com/olalonde)
