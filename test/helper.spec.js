@@ -13,6 +13,12 @@ describe('helper#transformRelativeToRootPath', () => {
     expect(result).to.equal(rootPath);
   });
 
+  it('transforms given Windows-style path relative path', () => {
+    const rootPath = slash(`./path`);
+    const result = transformRelativeToRootPath('~/some/path', '', '~', 'C:/some/file.js');
+    expect(result).to.equal(rootPath);
+  });
+
   it('throws error if no string is passed', () => {
     expect(() => {
       transformRelativeToRootPath();
