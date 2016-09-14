@@ -99,6 +99,9 @@ Webpack delivers a similar feature, if you just want to prevent end-less import 
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
 
 ## Change Log
+#### 4.1.3 - 2016-09-14
+- Support paths (thanks to [@sivael](https://github.com/sivael) 
+
 #### 4.1.0 - 2016-08-20
 - Use relative paths instead of absolute ones (thanks to [@nescalante](https://github.com/nescalante))
 
