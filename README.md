@@ -94,6 +94,13 @@ If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-imp
 }
 ```
 
+### Don't let Flow be confused
+If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is necessary to instruct it on how to map your chosen prefix to the root directory. Add the following to your .flowconfig file, replacing `~` with your chosen prefix.
+```
+[options]
+module.name_mapper='^~\/\(.*\)$' -> '<PROJECT_ROOT>/\1'
+```
+
 ## FYI
 Webpack delivers a similar feature, if you just want to prevent end-less import strings you can also define `aliases` in the `resolve` module, at the moment it doesn't support custom/different symbols and multiple/custom suffixes.
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
