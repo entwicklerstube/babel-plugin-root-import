@@ -1,5 +1,6 @@
 import {hasRootPathPrefixInString, transformRelativeToRootPath} from '../plugin/helper';
 import slash from 'slash';
+import path from 'path';
 
 describe('helper#transformRelativeToRootPath', () => {
   it('returns a string', () => {
@@ -8,9 +9,27 @@ describe('helper#transformRelativeToRootPath', () => {
   });
 
   it('transforms given path relative path', () => {
-    const rootPath = slash(`./path`);
+    const rootPath = slash('./path');
     const result = transformRelativeToRootPath('~/some/path', '', '~', 'some/file.js');
     expect(result).to.equal(rootPath);
+  });
+
+  it('considers .. in relative path', () => {
+    const rootPath = slash('./path');
+    const result = transformRelativeToRootPath('~/util', '../shared', '~', 'test.js');
+    expect(result).to.not.equal(`${path.resolve('../shared')}/util/test.js`);
+  });
+
+  it('considers multiple .. in relative path', () => {
+    const rootPath = slash('./path');
+    const result = transformRelativeToRootPath('~/util', '../../../shared', '~', 'test.js');
+    expect(result).to.not.equal(`${path.resolve('../../../shared')}/util/test.js`);
+  });
+
+  it('stops adding .. after the first one has been reached', () => {
+    const rootPath = slash('./path');
+    const result = transformRelativeToRootPath('~/util', '../shared/test/../test', '~', 'test.js');
+    expect(result).to.not.equal(`${path.resolve('../shared')}/util/test/../test/test.js`);
   });
 
   it('throws error if no string is passed', () => {
