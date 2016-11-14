@@ -15,19 +15,16 @@ describe('helper#transformRelativeToRootPath', () => {
   });
 
   it('considers .. in relative path', () => {
-    const rootPath = slash('./path');
     const result = transformRelativeToRootPath('~/util', '../shared', '~', 'test.js');
     expect(result).to.not.equal(`${path.resolve('../shared')}/util/test.js`);
   });
 
   it('considers multiple .. in relative path', () => {
-    const rootPath = slash('./path');
     const result = transformRelativeToRootPath('~/util', '../../../shared', '~', 'test.js');
     expect(result).to.not.equal(`${path.resolve('../../../shared')}/util/test.js`);
   });
 
   it('stops adding .. after the first one has been reached', () => {
-    const rootPath = slash('./path');
     const result = transformRelativeToRootPath('~/util', '../shared/test/../test', '~', 'test.js');
     expect(result).to.not.equal(`${path.resolve('../shared')}/util/test/../test/test.js`);
   });
