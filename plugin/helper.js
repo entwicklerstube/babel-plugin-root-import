@@ -49,6 +49,18 @@ export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPath
       relativePath += '/';
     }
 
+    // if the entry is a realtive path that goes up in hierarchy add missing .. statements e.g. ../shared
+    const pathParts = absolutePath.split('/');
+    for (let partIterator = 0; partIterator < pathParts.length; partIterator++) {
+      if (pathParts[partIterator] === '..') {
+        relativePath = `../${relativePath}`;
+      } else {
+        if (pathParts[partIterator].length > 0) {
+          break; // First String will be empty and would cause for loop to quit
+        }
+      }
+    }
+
     return relativePath;
   }
 
