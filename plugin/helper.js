@@ -29,7 +29,7 @@ export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPath
       withoutRootPathPrefix = importPath.substring(2, importPath.length);
     }
 
-    const absolutePath = `${rootPathSuffix ? rootPathSuffix : ''}/${withoutRootPathPrefix}`;
+    const absolutePath = `${rootPathSuffix ? rootPathSuffix : './'}/${withoutRootPathPrefix}`;
     let sourcePath = sourceFile.substring(0, sourceFile.lastIndexOf('/'));
 
     // if the path is an absolute path (webpack sends '/Users/foo/bar/baz.js' here)
@@ -37,7 +37,12 @@ export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPath
       sourcePath = sourcePath.substring(root.length + 1);
     }
 
-    let relativePath = slash(path.relative(`/${sourcePath}`, absolutePath));
+    if (absolutePath.charAt(0) !== '/') {
+      absolutePath = path.resolve(absolutePath);
+      sourcePath = path.resolve(sourcePath);
+    }
+
+    let relativePath = slash(path.relative(sourcePath, absolutePath));
 
     // if file is located in the same folder
     if (relativePath.indexOf('../') !== 0) {
@@ -47,18 +52,6 @@ export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPath
     // if the entry has a slash, keep it
     if (importPath[importPath.length - 1] === '/') {
       relativePath += '/';
-    }
-
-    // if the entry is a realtive path that goes up in hierarchy add missing .. statements e.g. ../shared
-    const pathParts = absolutePath.split('/');
-    for (let partIterator = 0; partIterator < pathParts.length; partIterator++) {
-      if (pathParts[partIterator] === '..') {
-        relativePath = `../${relativePath}`;
-      } else {
-        if (pathParts[partIterator].length > 0) {
-          break; // First String will be empty and would cause for loop to quit
-        }
-      }
     }
 
     return relativePath;

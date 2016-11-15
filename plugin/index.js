@@ -9,9 +9,8 @@ const replacePrefix = (path, opts = [], sourceFile) => {
     const option = options[i];
 
     if (option.rootPathSuffix && typeof option.rootPathSuffix === 'string') {
-      rootPathSuffix = `/${option.rootPathSuffix.replace(/^(\/)|(\/)$/g, '')}`;
+      rootPathSuffix = option.rootPathSuffix;
     }
-
     if (option.rootPathPrefix && typeof option.rootPathPrefix === 'string') {
       rootPathPrefix = option.rootPathPrefix;
     } else {

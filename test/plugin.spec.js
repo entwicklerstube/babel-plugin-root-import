@@ -221,7 +221,7 @@ describe('Babel Root Import - Plugin', () => {
       plugins
     });
 
-    const targetRequire2 = slash(`../.././some2/custom/root/some/example.js`);
+    const targetRequire2 = slash(`../../some2/custom/root/some/example.js`);
     const transformedImport2 = babel.transform("import SomeExample from '@/some/example.js';", {
       plugins
     });
