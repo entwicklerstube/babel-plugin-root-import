@@ -29,7 +29,7 @@ export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPath
       withoutRootPathPrefix = importPath.substring(2, importPath.length);
     }
 
-    const absolutePath = `${rootPathSuffix ? rootPathSuffix : './'}/${withoutRootPathPrefix}`;
+    let absolutePath = `${rootPathSuffix ? rootPathSuffix : './'}/${withoutRootPathPrefix}`;
     let sourcePath = sourceFile.substring(0, sourceFile.lastIndexOf('/'));
 
     // if the path is an absolute path (webpack sends '/Users/foo/bar/baz.js' here)
