@@ -75,6 +75,9 @@ You can supply an array of the above. The plugin will try each prefix/suffix pai
     }, {
       "rootPathPrefix": "@",
       "rootPathSuffix": "other-src/js"
+    }, {
+      "rootPathPrefix": "#",
+      "rootPathSuffix": "../../src/in/parent" // since we suport relative paths you can also go into a parent directory
     }]]
   ]
 }
@@ -106,8 +109,11 @@ Webpack delivers a similar feature, if you just want to prevent end-less import 
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
 
 ## Change Log
+#### 4.1.4 - 2016-11-15
+- Improve support for relative paths (e.g. referencing parent folders via ../) (thanks to [@Hizoul](https://github.com/hizoul))
+
 #### 4.1.3 - 2016-09-14
-- Support paths (thanks to [@sivael](https://github.com/sivael) 
+- Support paths (thanks to [@sivael](https://github.com/sivael))
 
 #### 4.1.0 - 2016-08-20
 - Use relative paths instead of absolute ones (thanks to [@nescalante](https://github.com/nescalante))
