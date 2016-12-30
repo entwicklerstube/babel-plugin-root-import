@@ -88,13 +88,12 @@ const bar = require('@/my-file');
 ```
 
 ### Don't let ESLint be confused
-If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to ignore root imports. Add the following to your .eslintrc file, replacing `~` with your chosen prefix.
-```
-{
-  "rules": {
-      "import/no-unresolved": [2, { "ignore": ["^[~]"] }]
-  },
-}
+If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-babel-root-import](https://github.com/olalonde/eslint-import-resolver-babel-root-import)
+
+```json
+    "import/resolver": {
+      "babel-root-import": {}
+    }
 ```
 
 ### Don't let Flow be confused
