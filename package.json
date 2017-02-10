@@ -1,5 +1,5 @@
 {
-  "name": "babel-root-import",
+  "name": "babel-root-babel-plugin-root-import",
   "version": "4.1.5",
   "description": "Babel Plugin to enable relative root-import",
   "author": "Michael J. Zoidl <github@michaelzoidl.com>",
@@ -9,7 +9,7 @@
     "index.js",
     "build"
   ],
-  "repository": "michaelzoidl/babel-root-import",
+  "repository": "entwicklerstube/babel-plugin-root-import",
   "scripts": {
     "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
     "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register --watch",

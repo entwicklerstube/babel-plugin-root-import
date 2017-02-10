@@ -1,9 +1,9 @@
 # Babel Root Import
 Babel plugin to add the opportunity to use `import` and `require` with root based paths.<br>
-[![Build Status](https://travis-ci.org/michaelzoidl/babel-root-import.svg?branch=master)](https://travis-ci.org/michaelzoidl/babel-root-import)
+[![Build Status](https://travis-ci.org/entwicklerstube/babel-plugin-root-import.svg?branch=master)](https://travis-ci.org/entwicklerstube/babel-plugin-root-import)
 [![Codacy Badge](https://img.shields.io/codacy/98f77bcc84964e67a2754e563b962d27.svg)](https://www.codacy.com/app/me_1438/both-io)
-[![Dependency Status](https://david-dm.org/michaelzoidl/babel-root-import.svg)](https://david-dm.org/michaelzoidl/babel-root-import)
-[![https://github.com/michaelzoidl/babel-root-import](https://img.shields.io/npm/dm/babel-root-import.svg)](https://www.npmjs.com/package/babel-root-import)
+[![Dependency Status](https://david-dm.org/entwicklerstube/babel-plugin-root-import.svg)](https://david-dm.org/entwicklerstube/babel-plugin-root-import)
+[![https://github.com/entwicklerstube/babel-plugin-root-import](https://img.shields.io/npm/dm/babel-plugin-root-import.svg)](https://www.npmjs.com/package/babel-plugin-root-import)
 
 ## Example
 ```javascript
@@ -17,8 +17,14 @@ const OtherExample = require('~/other/example.js');
 ```
 
 ## Install
+**npm**
 ```
-npm install babel-root-import --save-dev
+npm install babel-plugin-root-import --save-dev
+```
+
+**yarn**
+```
+yarn add babel-plugin-root-import --dev
 ```
 
 ## Use
@@ -26,14 +32,14 @@ Add a `.babelrc` file and write:
 ```javascript
 {
   "plugins": [
-    ["babel-root-import"]
+    ["babel-plugin-root-import"]
   ]
 }
 
 ```
 or pass the plugin with the plugins-flag on CLI
 ```
-babel-node myfile.js --plugins babel-root-import
+babel-node myfile.js --plugins babel-plugin-root-import
 ```
 
 ## Extras
@@ -42,7 +48,7 @@ If you want a custom root because for example all your files are in the src/js f
 ```javascript
 {
   "plugins": [
-    ["babel-root-import", {
+    ["babel-plugin-root-import", {
       "rootPathSuffix": "src/js"
     }]
   ]
@@ -54,7 +60,7 @@ If you don't like the `~` syntax you can just use your own symbol (for example a
 ```javascript
 {
   "plugins": [
-    ["babel-root-import", {
+    ["babel-plugin-root-import", {
       "rootPathPrefix": "@"
     }]
   ]
@@ -69,7 +75,7 @@ You can supply an array of the above. The plugin will try each prefix/suffix pai
 ```javascript
 {
   "plugins": [
-    ["babel-root-import", [{
+    ["babel-plugin-root-import", [{
       "rootPathPrefix": "~", // `~` is the default so you can remove this if you want
       "rootPathSuffix": "src/js"
     }, {
@@ -88,11 +94,11 @@ const bar = require('@/my-file');
 ```
 
 ### Don't let ESLint be confused
-If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-babel-root-import](https://github.com/olalonde/eslint-import-resolver-babel-root-import)
+If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-babel-plugin-root-import](https://github.com/olalonde/eslint-import-resolver-babel-plugin-root-import)
 
 ```json
     "import/resolver": {
-      "babel-root-import": {}
+      "babel-plugin-root-import": {}
     }
 ```
 
@@ -108,6 +114,11 @@ Webpack delivers a similar feature, if you just want to prevent end-less import 
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
 
 ## Change Log
+#### 5.0.0 - 2017-02-10
+- More consistent name: babel-plugin-root-impor [#63](https://github.com/entwicklerstube/babel-plugin-root-import/issues/63)
+- Renamed everything
+- Publish with new name on [npm](babel-plugin-root-import)
+
 #### 4.1.5 - 2016-11-17
 - Compile new version and release again
 
