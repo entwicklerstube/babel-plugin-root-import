@@ -103,10 +103,11 @@ If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-imp
 ```
 
 ### Don't let Flow be confused
-If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is necessary to instruct it on how to map your chosen prefix to the root directory. Add the following to your .flowconfig file, replacing `~` with your chosen prefix.
+
+If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is necessary to instruct it on how to map your chosen prefix to the root directory. Add the following to your `.flowconfig` file, replacing `~` with your chosen prefix and ensure that the mapping includes the corresponding suffix:
 ```
 [options]
-module.name_mapper='^~\/\(.*\)$' -> '<PROJECT_ROOT>/\1'
+module.name_mapper='^{rootPathPrefix}/\(.*\)$' -> '<PROJECT_ROOT>{rootPathSuffix}/\1'
 ```
 
 ## FYI
