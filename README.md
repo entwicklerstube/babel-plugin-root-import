@@ -116,7 +116,7 @@ Webpack delivers a similar feature, if you just want to prevent end-less import 
 
 ## Change Log
 #### 5.0.0 - 2017-02-10
-- More consistent name: babel-plugin-root-impor [#63](https://github.com/entwicklerstube/babel-plugin-root-import/issues/63)
+- More consistent name: babel-plugin-root-import [#63](https://github.com/entwicklerstube/babel-plugin-root-import/issues/63)
 - Renamed everything
 - Publish with new name on [npm](babel-plugin-root-import)
 
