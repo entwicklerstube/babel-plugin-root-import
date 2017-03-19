@@ -43,8 +43,8 @@ const traverseExpression = (t, arg) => {
   return null;
 };
 
-export default ({'types': t}) => ({
-  'visitor': {
+export default ({ 'types': t }) => {
+  const visitor = {
     CallExpression(path, state) {
       if (path.node.callee.name !== 'require') {
         return;
@@ -74,5 +74,12 @@ export default ({'types': t}) => ({
         path.node.source.value = replacePrefix(path.node.source.value, state.opts, state.file.opts.filename);
       }
     }
-  }
-});
+  };
+  return {
+    'visitor': {
+      Program(path, state) {
+        path.traverse(visitor, state);
+      }
+    }
+  };
+};
