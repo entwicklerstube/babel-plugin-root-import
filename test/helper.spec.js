@@ -14,6 +14,11 @@ describe('helper#transformRelativeToRootPath', () => {
     expect(result).to.equal(rootPath);
   });
 
+  it('ignores path prefix not followed by forward slash', () => {
+      const result = transformRelativeToRootPath('~util', '../shared', '~', 'test.js');
+      expect(result).to.equal('~util');
+  });
+
   it('considers .. in relative path', () => {
     const result = transformRelativeToRootPath('~/util', '../shared', '~', 'test.js');
     expect(result).to.not.equal(`${path.resolve('../shared')}/util/test.js`);
@@ -40,6 +45,10 @@ describe('helper#hasRootPathPrefixInString', () => {
   it('returns a boolean', () => {
     const func = hasRootPathPrefixInString();
     expect(func).to.be.a('boolean');
+  });
+
+  it('ignores path prefix not followed by forward slash', () => {
+    expect( hasRootPathPrefixInString('~some/path') ).to.be.false;
   });
 
   it('check if "~/" is at the beginning of the string', () => {

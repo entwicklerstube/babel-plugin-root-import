@@ -7,10 +7,6 @@ export const hasRootPathPrefixInString = (importPath, rootPathPrefix = '~') => {
   let containsRootPathPrefix = false;
 
   if (typeof importPath === 'string') {
-    if (importPath.substring(0, 1) === rootPathPrefix) {
-      containsRootPathPrefix = true;
-    }
-
     const firstTwoCharactersOfString = importPath.substring(0, 2);
     if (firstTwoCharactersOfString === `${rootPathPrefix}/`) {
       containsRootPathPrefix = true;
