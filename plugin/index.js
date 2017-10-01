@@ -4,18 +4,11 @@ const replacePrefix = (path, opts = [], sourceFile) => {
   const options = [].concat(opts);
 
   for (let i = 0; i < options.length; i++) {
-    let rootPathSuffix = '';
-    let rootPathPrefix = '';
     const option = options[i];
-
-    if (option.rootPathSuffix && typeof option.rootPathSuffix === 'string') {
-      rootPathSuffix = option.rootPathSuffix;
-    }
-    if (option.rootPathPrefix && typeof option.rootPathPrefix === 'string') {
-      rootPathPrefix = option.rootPathPrefix;
-    } else {
-      rootPathPrefix = '~';
-    }
+    const rootPathSuffix = typeof option.rootPathSuffix === 'string'
+    ? option.rootPathSuffix : '';
+    const rootPathPrefix = typeof option.rootPathPrefix === 'string'
+    ? option.rootPathPrefix : '~';
 
     if (hasRootPathPrefixInString(path, rootPathPrefix)) {
       return transformRelativeToRootPath(path, rootPathSuffix, rootPathPrefix, sourceFile);

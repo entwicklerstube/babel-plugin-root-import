@@ -234,4 +234,48 @@ describe('Babel Root Import - Plugin', () => {
     expect(transformedImport2.code).to.contain(targetRequire2);
     expect(transformedRequire2.code).to.contain(targetRequire2);
   });
+
+  it('uses the "#client" as custom prefix to detect a root-import path', () => {
+    const targetRequire = slash(`/some/example.js`);
+    const transformedImport = babel.transform("import SomeExample from '#client/some/example.js';", {
+      plugins: [[
+        BabelRootImportPlugin, {
+          rootPathPrefix: '#client'
+        }
+      ]]
+    });
+    const transformedRequire = babel.transform("var SomeExample = require('#client/some/example.js');", {
+      plugins: [[
+        BabelRootImportPlugin, {
+          rootPathPrefix: '#client'
+        }
+      ]]
+    });
+
+    expect(transformedImport.code).to.contain(targetRequire);
+    expect(transformedRequire.code).to.contain(targetRequire);
+  });
+
+  it('uses "#client" as custom prefix to detect a root-import path and has a custom rootPathSuffix', () => {
+    const targetRequire = slash(`/some/example.js`);
+    const transformedImport = babel.transform("import SomeExample from '#client/example.js';", {
+      plugins: [[
+        BabelRootImportPlugin, {
+          rootPathPrefix: '#client',
+          rootPathSuffix: 'some'
+        }
+      ]]
+    });
+    const transformedRequire = babel.transform("var SomeExample = require('#client/example.js');", {
+      plugins: [[
+        BabelRootImportPlugin, {
+          rootPathPrefix: '#client',
+          rootPathSuffix: 'some'
+        }
+      ]]
+    });
+
+    expect(transformedImport.code).to.contain(targetRequire);
+    expect(transformedRequire.code).to.contain(targetRequire);
+  });
 });
