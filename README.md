@@ -94,7 +94,7 @@ const bar = require('@/my-file');
 ```
 
 ### Don't let ESLint be confused
-If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-babel-root-import](https://github.com/olalonde/eslint-import-resolver-babel-root-import)
+If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-babel-plugin-root-import](https://github.com/bingqichen/eslint-import-resolver-babel-plugin-root-import)
 
 ```json
     "import/resolver": {
@@ -104,10 +104,10 @@ If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-imp
 
 ### Don't let Flow be confused
 
-If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is necessary to instruct it on how to map your chosen prefix to the root directory. Add the following to your `.flowconfig` file, replacing `~` with your chosen prefix and ensure that the mapping includes the corresponding suffix:
+If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is necessary to instruct it on how to map your chosen prefix to the root directory. Add the following to your `.flowconfig` file, replacing `{rootPathPrefix}` with your chosen prefix and `{rootPathSuffix}` with your chosen suffix.
 ```
 [options]
-module.name_mapper='^{rootPathPrefix}/\(.*\)$' -> '<PROJECT_ROOT>{rootPathSuffix}/\1'
+module.name_mapper='^{rootPathPrefix}/\(.*\)$' -> '<PROJECT_ROOT>/{rootPathSuffix}/\1'
 ```
 
 ## FYI
