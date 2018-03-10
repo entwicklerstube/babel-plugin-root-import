@@ -3,22 +3,13 @@ import path from 'path';
 
 const root = slash(global.rootPath || process.cwd());
 
-export const hasRootPathPrefixInString = (importPath, rootPathPrefix = '~') => {
-  let containsRootPathPrefix = false;
-
-  if (typeof importPath === 'string') {
-    if (importPath.substring(0, 1) === rootPathPrefix) {
-      containsRootPathPrefix = true;
-    }
-
-    const firstTwoCharactersOfString = importPath.substring(0, 2);
-    if (firstTwoCharactersOfString === `${rootPathPrefix}/`) {
-      containsRootPathPrefix = true;
-    }
-  }
-
-  return containsRootPathPrefix;
-};
+export const hasRootPathPrefixInString = (importPath, rootPathPrefix = '~') =>
+  typeof importPath === 'string' && (
+      // Case `~/some/path`.
+      importPath.substr(0, rootPathPrefix.length + 1) === `${rootPathPrefix}/` ||
+      // Case `~`.
+      importPath === rootPathPrefix
+    );
 
 export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPathPrefix, sourceFile = '') => {
   let withoutRootPathPrefix = '';

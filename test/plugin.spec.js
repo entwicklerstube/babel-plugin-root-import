@@ -92,6 +92,27 @@ describe('Babel Root Import - Plugin', () => {
     expect(transformedRequire.code).to.contain(targetRequire);
   });
 
+  it('ignores scoped packages when uses the "@" as custom prefix', () => {
+    const targetRequire = slash(`@a/b/some/example.js`);
+    const transformedImport = babel.transform("import SomeExample from '@a/b/some/example.js';", {
+      plugins: [[
+        BabelRootImportPlugin, {
+          rootPathPrefix: '@'
+        }
+      ]]
+    });
+    const transformedRequire = babel.transform("var SomeExample = require('@a/b/some/example.js');", {
+      plugins: [[
+        BabelRootImportPlugin, {
+          rootPathPrefix: '@'
+        }
+      ]]
+    });
+
+    expect(transformedImport.code).to.contain(targetRequire);
+    expect(transformedRequire.code).to.contain(targetRequire);
+  });
+
   it('supports re-export syntax (export * from ... or export { named } from ...)', () => {
     const targetRequire = slash(`/some/example.js`);
     const transformedExportAll = babel.transform("export * from '@/some/example.js';", {
