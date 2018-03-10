@@ -55,4 +55,9 @@ describe('helper#hasRootPathPrefixInString', () => {
     expect(nothingPassed).to.be.false;
     expect(wrongTypePassed).to.be.false;
   });
+
+  it('checks importing of the root', () => {
+    const rootImport = hasRootPathPrefixInString('~');
+    expect(rootImport).to.be.true;
+  });
 });
