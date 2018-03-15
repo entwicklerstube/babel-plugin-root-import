@@ -154,6 +154,69 @@ describe('Babel Root Import - Plugin', () => {
     expect(transformedRequire.code).to.contain(targetRequire);
   });
 
+  it('uses a custom string as a prefix to detect a root-import path', () => {
+    const targetRequire = slash(`/some/example.js`);
+    const transformedImport = babel.transform("import SomeExample from 'src/some/example.js';", {
+      plugins: [[
+        BabelRootImportPlugin, {
+          rootPathPrefix: 'src'
+        }
+      ]]
+    });
+    const transformedRequire = babel.transform("var SomeExample = require('src/some/example.js');", {
+      plugins: [[
+        BabelRootImportPlugin, {
+          rootPathPrefix: 'src'
+        }
+      ]]
+    });
+
+    expect(transformedImport.code).to.contain(targetRequire);
+    expect(transformedRequire.code).to.contain(targetRequire);
+  });
+
+  it('uses a custom string with multiple parts as a prefix to detect a root-import path', () => {
+	const targetRequire = slash(`/some/example.js`);
+	const transformedImport = babel.transform("import SomeExample from 'src/js/some/example.js';", {
+	  plugins: [[
+		BabelRootImportPlugin, {
+		  rootPathPrefix: 'src/js'
+		}
+	  ]]
+	});
+	const transformedRequire = babel.transform("var SomeExample = require('src/js/some/example.js');", {
+	  plugins: [[
+		BabelRootImportPlugin, {
+		  rootPathPrefix: 'src/js'
+		}
+	  ]]
+	});
+
+	expect(transformedImport.code).to.contain(targetRequire);
+	expect(transformedRequire.code).to.contain(targetRequire);
+  });
+
+  it('uses a custom string with trailing slash as a prefix to detect a root-import path', () => {
+	const targetRequire = slash(`/some/example.js`);
+	const transformedImport = babel.transform("import SomeExample from 'src/some/example.js';", {
+	  plugins: [[
+		BabelRootImportPlugin, {
+		  rootPathPrefix: 'src/'
+		}
+	  ]]
+	});
+	const transformedRequire = babel.transform("var SomeExample = require('src/some/example.js');", {
+	  plugins: [[
+		BabelRootImportPlugin, {
+		  rootPathPrefix: 'src/'
+		}
+	  ]]
+	});
+
+	expect(transformedImport.code).to.contain(targetRequire);
+	expect(transformedRequire.code).to.contain(targetRequire);
+  });
+
   it('uses "@" as custom prefix to detect a root-import path and has a custom rootPathSuffix', () => {
     const targetRequire = slash(`/some/example.js`);
     const transformedImport = babel.transform("import SomeExample from '@/example.js';", {
