@@ -1,7 +1,9 @@
+import fs from 'fs';
 import slash from 'slash';
 import path from 'path';
 
-const root = slash(global.rootPath || process.cwd());
+const processRoot = slash(global.rootPath || process.cwd());
+const roots = {};
 
 export const hasRootPathPrefixInString = (importPath, rootPathPrefix = '~') => {
   let containsRootPathPrefix = false;
@@ -20,7 +22,7 @@ export const hasRootPathPrefixInString = (importPath, rootPathPrefix = '~') => {
   return containsRootPathPrefix;
 };
 
-export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPathPrefix, sourceFile = '') => {
+export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPathPrefix, sourceFile) => {
   let withoutRootPathPrefix = '';
   if (hasRootPathPrefixInString(importPath, rootPathPrefix)) {
     if (importPath.substring(0, 1) === '/') {
@@ -29,17 +31,10 @@ export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPath
       withoutRootPathPrefix = importPath.substring(2, importPath.length);
     }
 
-    const absolutePath = path.resolve(`${rootPathSuffix ? rootPathSuffix : './'}/${withoutRootPathPrefix}`);
-    let sourcePath = sourceFile.substring(0, sourceFile.lastIndexOf('/'));
-
-    // if the path is an absolute path (webpack sends '/Users/foo/bar/baz.js' here)
-    if (sourcePath.indexOf('/') === 0 || sourcePath.indexOf(':/') === 1 || sourcePath.indexOf(':\\') === 1) {
-      sourcePath = sourcePath.substring(root.length + 1);
-    }
-
-    sourcePath = path.resolve(sourcePath);
-
-    let relativePath = slash(path.relative(sourcePath, absolutePath));
+    let sourceDir = path.dirname(sourceFile)
+    let root = findRoot(sourceDir)
+    let absolutePath = slash(path.resolve(root, rootPathSuffix || './', withoutRootPathPrefix));
+    let relativePath = slash(path.relative(sourceDir, absolutePath));
 
     // if file is located in the same folder
     if (relativePath.indexOf('../') !== 0) {
@@ -60,3 +55,29 @@ export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPath
 
   throw new Error('ERROR: No path passed');
 };
+
+function findRoot(dirname)
+{
+  // if the root is already cached, return it
+  let root = roots[dirname];
+  if(root)
+    return root;
+
+  // search for the root
+  while(true)
+  {
+    // if .babelrc exists here, then we found the root
+    let brcpath = path.resolve(dirname, '.babelrc');
+    if(fs.existsSync(brcpath))
+    {
+      roots[dirname] = dirname;
+      return dirname;
+    }
+
+    // move to the parent directory, if it exists
+    let nextdir = path.dirname(dirname);
+    if(nextdir === dirname)
+      return processRoot;
+    dirname = nextdir;
+  }
+}

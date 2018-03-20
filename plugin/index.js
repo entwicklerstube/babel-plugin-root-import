@@ -43,7 +43,7 @@ const traverseExpression = (t, arg) => {
   return null;
 };
 
-export default ({ 'types': t }) => {
+export default ({types: t}) => {
   const visitor = {
     CallExpression(path, state) {
       if (path.node.callee.name !== 'require') {
