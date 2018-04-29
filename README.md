@@ -33,7 +33,12 @@ Add a `.babelrc` file and write:
 {
   "plugins": [
     ["babel-plugin-root-import"]
-  ]
+  ],
+  "env": { // For React Native
+    "production": {
+      "plugins": ["babel-plugin-root-import"]
+    }
+  }
 }
 
 ```
@@ -51,19 +56,39 @@ If you want a custom root because for example all your files are in the src/js f
     ["babel-plugin-root-import", {
       "rootPathSuffix": "src/js"
     }]
-  ]
+  ],
+  "env": { // For React Native
+    "production": {
+      "plugins": [
+        ["babel-plugin-root-import", {
+          "rootPathSuffix": "src/js"
+        }]
+      ]
+    }
+  }
 }
 ```
 
 ### Custom root-path-prefix
 If you don't like the `~` syntax you can just use your own symbol (for example a `@` symbol or `\`)
 ```javascript
-{
+// If your project uses "@firebase" or "@angular", for example, don't use "@". It generates problems in production.
+// Waiting this change: https://github.com/entwicklerstube/babel-plugin-root-import/pull/97
+{ 
   "plugins": [
     ["babel-plugin-root-import", {
       "rootPathPrefix": "@"
     }]
-  ]
+  ],
+  "env": { // For React Native
+    "production": {
+      "plugins": [
+        ["babel-plugin-root-import", {
+          "rootPathPrefix": "@"
+        }]
+      ]
+    }
+  }
 }
 
 // Now you can use the plugin like:
@@ -85,7 +110,16 @@ You can supply an array of the above. The plugin will try each prefix/suffix pai
       "rootPathPrefix": "#",
       "rootPathSuffix": "../../src/in/parent" // since we suport relative paths you can also go into a parent directory
     }]]
-  ]
+  ],
+  "env": { // For React Native
+    "production": {
+      "plugins": [
+        ["babel-plugin-root-import", {
+          // Place above configs here.
+        }]
+      ]
+    }
+  }
 }
 
 // Now you can use the plugin like:
