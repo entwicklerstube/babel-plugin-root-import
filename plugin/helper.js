@@ -21,6 +21,7 @@ export const hasRootPathPrefixInString = (importPath, rootPathPrefix = '~') => {
 };
 
 export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPathPrefix, sourceFile = '') => {
+  sourceFile = sourceFile.replace(/\\/g, '/');
   let withoutRootPathPrefix = '';
   if (hasRootPathPrefixInString(importPath, rootPathPrefix)) {
     if (importPath.substring(0, 1) === '/') {
