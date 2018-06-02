@@ -144,6 +144,35 @@ If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is nece
 module.name_mapper='^{rootPathPrefix}/\(.*\)$' -> '<PROJECT_ROOT>/{rootPathSuffix}/\1'
 ```
 
+## Don't let VSCode be confused
+For features like go-to-definition, VSCode needs to be able to resolve `require`/`import` paths to files on disk. This only works with one `rootPathSuffix`, but you may define multiple `rootPathPrefix` entries.
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./{rootPathSuffix}/",
+    "paths": {
+      "{rootPathPrefix}/*": ["*"]
+    }
+  }
+}
+```
+
+For example, with `~/x/y.js` -> `./src/x/y.js`:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "paths": {
+      "~/*": ["*"]
+    }
+  }
+}
+```
+
+Note that VSCode won't currently generate imports containing `rootPathPrefix`. If you have a solution for this, please open an issue.
+
 ## FYI
 Webpack delivers a similar feature, if you just want to prevent end-less import strings you can also define `aliases` in the `resolve` module, at the moment it doesn't support custom/different symbols and multiple/custom suffixes.
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
