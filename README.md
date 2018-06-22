@@ -144,15 +144,16 @@ If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is nece
 module.name_mapper='^{rootPathPrefix}/\(.*\)$' -> '<PROJECT_ROOT>/{rootPathSuffix}/\1'
 ```
 
-## Don't let VSCode be confused
+### Don't let VSCode be confused
+
 For features like go-to-definition, VSCode needs to be able to resolve `require`/`import` paths to files on disk. This only works with one `rootPathSuffix`, but you may define multiple `rootPathPrefix` entries.
 
 ```json
 {
   "compilerOptions": {
-    "baseUrl": "./{rootPathSuffix}/",
+    "baseUrl": ".",
     "paths": {
-      "{rootPathPrefix}/*": ["*"]
+      "{rootPathPrefix}/*": ["src/*"]
     }
   }
 }
@@ -163,9 +164,9 @@ For example, with `~/x/y.js` -> `./src/x/y.js`:
 ```json
 {
   "compilerOptions": {
-    "baseUrl": "./src/",
+    "baseUrl": ".",
     "paths": {
-      "~/*": ["*"]
+      "~/*": ["src/*"]
     }
   }
 }
