@@ -184,6 +184,11 @@ Webpack delivers a similar feature, if you just want to prevent end-less import 
 Sometimes tooling might not be up to scratch, meaning you lose features such as navigation in your IDE. In such cases you might want to revert back to using relative paths again. If you have a significant amount of files, it might be worth looking into [tooling](https://www.npmjs.com/package/convert-root-import) to help you with the conversion.
 
 ## Change Log
+
+#### 6.1.0 - 2018-06-23
+
+- Supports babel 7
+
 #### 5.0.0 - 2017-02-10
 - More consistent name: babel-plugin-root-import [#63](https://github.com/entwicklerstube/babel-plugin-root-import/issues/63)
 - Renamed everything
