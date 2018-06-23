@@ -3,6 +3,10 @@ import slash from 'slash';
 import {hasRootPathPrefixInString, transformRelativeToRootPath} from './helper';
 
 const replacePrefix = (path, opts = [], sourceFile) => {
+  if ('paths' in opts) {
+      opts = opts['paths'];
+  }
+
   const options = [].concat(opts);
 
   for (let i = 0; i < options.length; i++) {
@@ -48,7 +52,7 @@ const traverseExpression = (t, arg) => {
 export default ({ 'types': t }) => {
   const visitor = {
     CallExpression(path, state) {
-      if (path.node.callee.name !== 'require') {
+      if (!(path.node.callee.name === 'require' || t.isImport(path.node.callee))) {
         return;
       }
 
