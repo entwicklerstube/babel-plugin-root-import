@@ -14,7 +14,8 @@
     "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
     "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register --watch",
     "lint-js": "eslint plugin",
-    "compile": "babel -d build/ plugin/"
+    "compile": "babel -d build/ plugin/",
+    "prepublish": "npm run test && npm run compile"
   },
   "dependencies": {
     "slash": "^1.0.0"
