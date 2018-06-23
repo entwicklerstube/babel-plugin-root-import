@@ -33,7 +33,12 @@ Add a `.babelrc` file and write:
 {
   "plugins": [
     ["babel-plugin-root-import"]
-  ]
+  ],
+  "env": { // For React Native
+    "production": {
+      "plugins": ["babel-plugin-root-import"]
+    }
+  }
 }
 
 ```
@@ -51,19 +56,39 @@ If you want a custom root because for example all your files are in the src/js f
     ["babel-plugin-root-import", {
       "rootPathSuffix": "src/js"
     }]
-  ]
+  ],
+  "env": { // For React Native
+    "production": {
+      "plugins": [
+        ["babel-plugin-root-import", {
+          "rootPathSuffix": "src/js"
+        }]
+      ]
+    }
+  }
 }
 ```
 
 ### Custom root-path-prefix
 If you don't like the `~` syntax you can just use your own symbol (for example a `@` symbol or `\`)
 ```javascript
-{
+// If your project uses "@firebase" or "@angular", for example, don't use "@". It generates problems in production.
+// Waiting this change: https://github.com/entwicklerstube/babel-plugin-root-import/pull/97
+{ 
   "plugins": [
     ["babel-plugin-root-import", {
       "rootPathPrefix": "@"
     }]
-  ]
+  ],
+  "env": { // For React Native
+    "production": {
+      "plugins": [
+        ["babel-plugin-root-import", {
+          "rootPathPrefix": "@"
+        }]
+      ]
+    }
+  }
 }
 
 // Now you can use the plugin like:
@@ -87,7 +112,16 @@ You can supply an array of the above. The plugin will try each prefix/suffix pai
         "rootPathSuffix": "../../src/in/parent" // since we suport relative paths you can also go into a parent directory
       }]
     }]
-  ]
+  ],
+  "env": { // For React Native
+    "production": {
+      "plugins": [
+        ["babel-plugin-root-import", {
+          // Place above configs here.
+        }]
+      ]
+    }
+  }
 }
 
 // Now you can use the plugin like:
@@ -96,7 +130,7 @@ const bar = require('@/my-file');
 ```
 
 ### Don't let ESLint be confused
-If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-babel-root-import](https://github.com/olalonde/eslint-import-resolver-babel-root-import)
+If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-babel-plugin-root-import](https://github.com/bingqichen/eslint-import-resolver-babel-plugin-root-import)
 
 ```json
     "import/resolver": {
@@ -106,15 +140,48 @@ If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-imp
 
 ### Don't let Flow be confused
 
-If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is necessary to instruct it on how to map your chosen prefix to the root directory. Add the following to your `.flowconfig` file, replacing `~` with your chosen prefix and ensure that the mapping includes the corresponding suffix:
+If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is necessary to instruct it on how to map your chosen prefix to the root directory. Add the following to your `.flowconfig` file, replacing `{rootPathPrefix}` with your chosen prefix and `{rootPathSuffix}` with your chosen suffix.
 ```
 [options]
-module.name_mapper='^{rootPathPrefix}/\(.*\)$' -> '<PROJECT_ROOT>{rootPathSuffix}/\1'
+module.name_mapper='^{rootPathPrefix}/\(.*\)$' -> '<PROJECT_ROOT>/{rootPathSuffix}/\1'
 ```
+
+### Don't let VSCode be confused
+
+For features like go-to-definition, VSCode needs to be able to resolve `require`/`import` paths to files on disk. This only works with one `rootPathSuffix`, but you may define multiple `rootPathPrefix` entries.
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "{rootPathPrefix}/*": ["src/*"]
+    }
+  }
+}
+```
+
+For example, with `~/x/y.js` -> `./src/x/y.js`:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  }
+}
+```
+
+Note that VSCode won't currently generate imports containing `rootPathPrefix`. If you have a solution for this, please open an issue.
 
 ## FYI
 Webpack delivers a similar feature, if you just want to prevent end-less import strings you can also define `aliases` in the `resolve` module, at the moment it doesn't support custom/different symbols and multiple/custom suffixes.
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
+
+### Want to revert back to relative paths?
+Sometimes tooling might not be up to scratch, meaning you lose features such as navigation in your IDE. In such cases you might want to revert back to using relative paths again. If you have a significant amount of files, it might be worth looking into [tooling](https://www.npmjs.com/package/convert-root-import) to help you with the conversion.
 
 ## Change Log
 #### 5.0.0 - 2017-02-10

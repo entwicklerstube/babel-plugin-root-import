@@ -1,6 +1,6 @@
 {
-  "name": "babel-7-plugin-root-import",
-  "version": "5.4.0",
+  "name": "babel-plugin-root-import",
+  "version": "6.0.0",
   "description": "Babel Plugin to enable relative root-import",
   "author": "Michael J. Zoidl <github@michaelzoidl.com>",
   "license": "MIT",
