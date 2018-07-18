@@ -1,4 +1,3 @@
-# Babel Root Import
 Babel plugin to add the opportunity to use `import` and `require` with root based paths.<br>
 [![Build Status](https://travis-ci.org/entwicklerstube/babel-plugin-root-import.svg?branch=master)](https://travis-ci.org/entwicklerstube/babel-plugin-root-import)
 [![Codacy Badge](https://img.shields.io/codacy/98f77bcc84964e67a2754e563b962d27.svg)](https://www.codacy.com/app/me_1438/both-io)
@@ -6,50 +5,71 @@ Babel plugin to add the opportunity to use `import` and `require` with root base
 [![https://github.com/entwicklerstube/babel-plugin-root-import](https://img.shields.io/npm/dm/babel-plugin-root-import.svg)](https://www.npmjs.com/package/babel-plugin-root-import)
 
 ## Example
+
 ```javascript
-// Usually
+// Without this plugin...
 import SomeExample from '../../../some/example.js';
 const OtherExample = require('../../../other/example.js');
 
-// With Babel-Root-Importer
+// With babel-plugin-root-import you can write...
 import SomeExample from '~/some/example.js';
 const OtherExample = require('~/other/example.js');
 ```
 
 ## Install
-**npm**
+
+Install with your package manager of choice.
+
 ```
 npm install babel-plugin-root-import --save-dev
-```
-
-**yarn**
-```
+# or
 yarn add babel-plugin-root-import --dev
 ```
 
 ## Use
-Add a `.babelrc` file and write:
+
+Add it to your plugins array in your babel config, e.g.
+a `.babelrc` file.
+
 ```javascript
 {
   "plugins": [
     ["babel-plugin-root-import"]
   ],
-  "env": { // For React Native
+  // or for react-native
+  "env": {
     "production": {
       "plugins": ["babel-plugin-root-import"]
     }
   }
 }
-
-```
-or pass the plugin with the plugins-flag on CLI
-```
-babel-node myfile.js --plugins babel-plugin-root-import
 ```
 
-## Extras
-### Custom root-path-suffix
-If you want a custom root because for example all your files are in the src/js folder you can define this in your `.babelrc` file
+## Config
+
+You can configure this plugin by changing the string plugin
+name to a two-item array. Note that this array is nested inside
+the plugins array. Here's an example with the default config.
+
+```javascript
+  "plugins": [
+    [
+      "babel-plugin-root-import",
+      {
+        "rootPathSuffix": "./",
+        "rootPathPrefix": "~"
+      }
+    ]
+  ],
+```
+
+### Custom rootPathSuffix
+
+By default, the import will be relative to the working directory of
+the process running babel. Typically this means you'll have import
+paths like `~/src/foo.js`. You can change the prefix of `"./"` to e.g.
+`"src"` or `"src/js"` with this config option.
+
 ```javascript
 {
   "plugins": [
@@ -57,7 +77,8 @@ If you want a custom root because for example all your files are in the src/js f
       "rootPathSuffix": "src/js"
     }]
   ],
-  "env": { // For React Native
+  // For react-native
+  "env": {
     "production": {
       "plugins": [
         ["babel-plugin-root-import", {
@@ -69,55 +90,74 @@ If you want a custom root because for example all your files are in the src/js f
 }
 ```
 
-### Custom root-path-prefix
-If you don't like the `~` syntax you can just use your own symbol (for example a `@` symbol or `\`)
+The paths `"src/js"` and `"./src/js"` behave the same. 
+
+### Custom rootPathPrefix
+
+If you don't like the `~` syntax you can use your own symbol (for example an `#` symbol or `\`). Using
+`@` is not recommended, as recent versions of NPM allow `@` in package names. `~` is the default since
+it's very unlikely to conflict with anything (and wouldn't be expanded to HOME anyway).
+
+This **must** be 1 or 2 characters. Any additional characters are ignored.
+
 ```javascript
-// If your project uses "@firebase" or "@angular", for example, don't use "@". It generates problems in production.
+// 
 // Waiting this change: https://github.com/entwicklerstube/babel-plugin-root-import/pull/97
 { 
   "plugins": [
     ["babel-plugin-root-import", {
-      "rootPathPrefix": "@"
+      "rootPathPrefix": "#"
     }]
   ],
-  "env": { // For React Native
+  // For react-native
+  "env": {
     "production": {
       "plugins": [
         ["babel-plugin-root-import", {
-          "rootPathPrefix": "@"
+          "rootPathPrefix": "#"
         }]
       ]
     }
   }
 }
 
-// Now you can use the plugin like:
-import foo from '@/my-file';
+// Now you can use the plugin like either of these
+import foo from '#my-file';
+import foo from '#/my-file';
 ```
 
+If you set it to e.g. `"#/"` then it'll require the slash in the import path.
+
 ### Multiple custom prefixes and suffixes
+
 You can supply an array of the above. The plugin will try each prefix/suffix pair in the order they are defined.
+
 ```javascript
 {
   "plugins": [
     ["babel-plugin-root-import", {
       "paths": [{
-        "rootPathPrefix": "~", // `~` is the default so you can remove this if you want
+        // `~` is the default so you can remove this if you want
+        "rootPathPrefix": "~",
         "rootPathSuffix": "src/js"
       }, {
         "rootPathPrefix": "@",
         "rootPathSuffix": "other-src/js"
       }, {
+        // since we suport relative paths you can also go into a parent directory
         "rootPathPrefix": "#",
-        "rootPathSuffix": "../../src/in/parent" // since we suport relative paths you can also go into a parent directory
+        "rootPathSuffix": "../../src/in/parent"
       }]
     }]
   ],
-  "env": { // For React Native
+  // For react-native
+  "env": { 
     "production": {
       "plugins": [
         ["babel-plugin-root-import", {
-          // Place above configs here.
+          "paths": [
+            // Place above configs here.
+          ]
         }]
       ]
     }
@@ -125,11 +165,12 @@ You can supply an array of the above. The plugin will try each prefix/suffix pai
 }
 
 // Now you can use the plugin like:
-import foo from '~/my-file';
-const bar = require('@/my-file');
+import foo from '~/foo';
+const bar = require('@/bar');
 ```
 
 ### Don't let ESLint be confused
+
 If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-babel-plugin-root-import](https://github.com/bingqichen/eslint-import-resolver-babel-plugin-root-import)
 
 ```json
@@ -174,13 +215,13 @@ For example, with `~/x/y.js` -> `./src/x/y.js`:
 }
 ```
 
-Note that VSCode won't currently generate imports containing `rootPathPrefix`. If you have a solution for this, please open an issue.
-
 ## FYI
+
 Webpack delivers a similar feature, if you just want to prevent end-less import strings you can also define `aliases` in the `resolve` module, at the moment it doesn't support custom/different symbols and multiple/custom suffixes.
 [READ MORE](http://xabikos.com/2015/10/03/Webpack-aliases-and-relative-paths/)
 
 ### Want to revert back to relative paths?
+
 Sometimes tooling might not be up to scratch, meaning you lose features such as navigation in your IDE. In such cases you might want to revert back to using relative paths again. If you have a significant amount of files, it might be worth looking into [tooling](https://www.npmjs.com/package/convert-root-import) to help you with the conversion.
 
 ## Change Log
