@@ -35,8 +35,14 @@ a `.babelrc` file.
 {
   "plugins": [
     ["babel-plugin-root-import"]
-  ],
-  // or for react-native
+  ]
+}
+```
+
+Or for react-native:
+
+```
+{
   "env": {
     "production": {
       "plugins": ["babel-plugin-root-import"]
@@ -44,6 +50,8 @@ a `.babelrc` file.
   }
 }
 ```
+
+For the rest of this readme, it's implied that you'll configure the plugin as above when using react-native.
 
 ## Config
 
@@ -76,17 +84,7 @@ paths like `~/src/foo.js`. You can change the prefix of `"./"` to e.g.
     ["babel-plugin-root-import", {
       "rootPathSuffix": "src/js"
     }]
-  ],
-  // For react-native
-  "env": {
-    "production": {
-      "plugins": [
-        ["babel-plugin-root-import", {
-          "rootPathSuffix": "src/js"
-        }]
-      ]
-    }
-  }
+  ]
 }
 ```
 
@@ -108,17 +106,7 @@ This **must** be 1 or 2 characters. Any additional characters are ignored.
     ["babel-plugin-root-import", {
       "rootPathPrefix": "#"
     }]
-  ],
-  // For react-native
-  "env": {
-    "production": {
-      "plugins": [
-        ["babel-plugin-root-import", {
-          "rootPathPrefix": "#"
-        }]
-      ]
-    }
-  }
+  ]
 }
 
 // Now you can use the plugin like either of these
@@ -149,19 +137,7 @@ You can supply an array of the above. The plugin will try each prefix/suffix pai
         "rootPathSuffix": "../../src/in/parent"
       }]
     }]
-  ],
-  // For react-native
-  "env": { 
-    "production": {
-      "plugins": [
-        ["babel-plugin-root-import", {
-          "paths": [
-            // Place above configs here.
-          ]
-        }]
-      ]
-    }
-  }
+  ]
 }
 
 // Now you can use the plugin like:
