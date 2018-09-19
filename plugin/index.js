@@ -83,8 +83,10 @@ export default ({ 'types': t }) => {
   };
   return {
     'visitor': {
-      Program(path, state) {
-        path.traverse(visitor, state);
+      'Program': {
+        exit(path, state) {
+          path.traverse(visitor, state);
+        }
       }
     }
   };
