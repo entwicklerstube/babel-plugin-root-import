@@ -21,6 +21,8 @@
     "slash": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
     "babel-cli": "^6.10.1",
     "babel-core": "^6.2.1",
     "babel-eslint": "^5.0.0",
