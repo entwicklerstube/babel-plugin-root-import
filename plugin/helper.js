@@ -4,30 +4,19 @@ import path from 'path';
 const root = slash(global.rootPath || process.cwd());
 
 export const hasRootPathPrefixInString = (importPath, rootPathPrefix = '~') => {
-  let containsRootPathPrefix = false;
+  const re = new RegExp('^' + rootPathPrefix, 'g');
 
-  if (typeof importPath === 'string') {
-    if (importPath.substring(0, 1) === rootPathPrefix) {
-      containsRootPathPrefix = true;
-    }
-
-    const firstTwoCharactersOfString = importPath.substring(0, 2);
-    if (firstTwoCharactersOfString === `${rootPathPrefix}/`) {
-      containsRootPathPrefix = true;
-    }
-  }
-
-  return containsRootPathPrefix;
+  return !!(
+    (typeof importPath === 'string') &&
+    importPath.match(re)
+  );
 };
 
 export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPathPrefix, sourceFile = '') => {
-  let withoutRootPathPrefix = '';
+  const re = new RegExp('^' + rootPathPrefix, 'g');
+
   if (hasRootPathPrefixInString(importPath, rootPathPrefix)) {
-    if (importPath.substring(0, 1) === '/') {
-      withoutRootPathPrefix = importPath.substring(1, importPath.length);
-    } else {
-      withoutRootPathPrefix = importPath.substring(2, importPath.length);
-    }
+    const withoutRootPathPrefix = importPath.replace(re, '');
 
     const absolutePath = path.resolve(`${rootPathSuffix ? rootPathSuffix : './'}/${withoutRootPathPrefix}`);
     let sourcePath = sourceFile.substring(0, sourceFile.lastIndexOf('/'));

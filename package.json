@@ -3,6 +3,13 @@
   "version": "6.1.0",
   "description": "Babel Plugin to enable relative root-import",
   "author": "Michael J. Zoidl <github@michaelzoidl.com>",
+  "contributors": [
+    {
+      "name" : "Tomas Savigliano",
+      "email" : "ralusek@gmail.com",
+      "url" : "https://github.com/ralusek"
+    }
+  ],
   "license": "MIT",
   "main": "index.js",
   "files": [
