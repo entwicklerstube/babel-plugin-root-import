@@ -1,4 +1,5 @@
 Babel plugin to add the opportunity to use `import` and `require` with root based paths.<br>
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f0e0cfda7214cd99ed22bb05ca2783e)](https://app.codacy.com/app/michaelzoidl/babel-plugin-root-import?utm_source=github.com&utm_medium=referral&utm_content=entwicklerstube/babel-plugin-root-import&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/entwicklerstube/babel-plugin-root-import.svg?branch=master)](https://travis-ci.org/entwicklerstube/babel-plugin-root-import)
 [![Codacy Badge](https://img.shields.io/codacy/98f77bcc84964e67a2754e563b962d27.svg)](https://www.codacy.com/app/me_1438/both-io)
 [![Dependency Status](https://david-dm.org/entwicklerstube/babel-plugin-root-import.svg)](https://david-dm.org/entwicklerstube/babel-plugin-root-import)
