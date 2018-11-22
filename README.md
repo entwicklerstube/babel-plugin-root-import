@@ -2,6 +2,7 @@ Babel plugin to add the opportunity to use `import` and `require` with root base
 [![Build Status](https://travis-ci.org/entwicklerstube/babel-plugin-root-import.svg?branch=master)](https://travis-ci.org/entwicklerstube/babel-plugin-root-import)
 [![Dependency Status](https://david-dm.org/entwicklerstube/babel-plugin-root-import.svg)](https://david-dm.org/entwicklerstube/babel-plugin-root-import)
 [![https://github.com/entwicklerstube/babel-plugin-root-import](https://img.shields.io/npm/dm/babel-plugin-root-import.svg)](https://www.npmjs.com/package/babel-plugin-root-import)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f0e0cfda7214cd99ed22bb05ca2783e)](https://app.codacy.com/app/michaelzoidl/babel-plugin-root-import?utm_source=github.com&utm_medium=referral&utm_content=entwicklerstube/babel-plugin-root-import&utm_campaign=Badge_Grade_Dashboard)
 
 ## Example
 
