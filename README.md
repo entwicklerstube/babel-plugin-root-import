@@ -39,15 +39,17 @@ a `.babelrc` file.
 }
 ```
 
-Or for react-native:
+For recent react-native versions, add it as a plugin in `babel.config.js`:
 
-```
-{
-  "env": {
-    "production": {
-      "plugins": ["babel-plugin-root-import"]
-    }
-  }
+```js
+module.exports = (api) => {
+  api.cache(true);
+
+  return {
+    plugins: [
+      'babel-plugin-root-import',
+    ],
+  };
 }
 ```
 
