@@ -125,8 +125,7 @@ You can supply an array of the above. The plugin will try each prefix/suffix pai
 ```javascript
 {
   "plugins": [
-    ["babel-plugin-root-import", {
-      "paths": [{
+    ["babel-plugin-root-import", [{
         // `~` is the default so you can remove this if you want
         "rootPathPrefix": "~",
         "rootPathSuffix": "src/js"
@@ -138,7 +137,7 @@ You can supply an array of the above. The plugin will try each prefix/suffix pai
         "rootPathPrefix": "#",
         "rootPathSuffix": "../../src/in/parent"
       }]
-    }]
+    ]
   ]
 }
 
