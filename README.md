@@ -94,11 +94,9 @@ The paths `"src/js"` and `"./src/js"` behave the same.
 
 ### Custom rootPathPrefix
 
-If you don't like the `~` syntax you can use your own symbol (for example an `#` symbol or `\`). Using
+If you don't like the `~` syntax you can use your own symbol (for example an `#` symbol or `\` or anything you want). Using
 `@` is not recommended, as recent versions of NPM allow `@` in package names. `~` is the default since
 it's very unlikely to conflict with anything (and wouldn't be expanded to HOME anyway).
-
-This **must** be 1 or 2 characters. Any additional characters are ignored.
 
 ```javascript
 // 
@@ -202,6 +200,10 @@ Webpack delivers a similar feature, if you just want to prevent end-less import 
 Sometimes tooling might not be up to scratch, meaning you lose features such as navigation in your IDE. In such cases you might want to revert back to using relative paths again. If you have a significant amount of files, it might be worth looking into [tooling](https://www.npmjs.com/package/convert-root-import) to help you with the conversion.
 
 ## Change Log
+
+#### 6.2.0 - 2019-05-09
+
+- Remove the 2 characters restriction
 
 #### 6.1.0 - 2018-06-23
 
