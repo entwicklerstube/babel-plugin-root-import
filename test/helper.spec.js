@@ -29,6 +29,12 @@ describe('helper#transformRelativeToRootPath', () => {
     expect(result).to.not.equal(`${path.resolve('../shared')}/util/test/../test/test.js`);
   });
 
+  it('works with long prefix and special characters', () => {
+    const rootPath = slash('./path');
+    const result = transformRelativeToRootPath('common$^plop/some/path', '', 'common$^plop', 'some/file.js');
+    expect(result).to.equal(rootPath);
+  });
+
   it('throws error if no string is passed', () => {
     expect(() => {
       transformRelativeToRootPath();
@@ -45,6 +51,13 @@ describe('helper#hasRootPathPrefixInString', () => {
   it('check if "~/" is at the beginning of the string', () => {
     const withoutRootPathPrefix = hasRootPathPrefixInString('some/path');
     const withRootPathPrefix = hasRootPathPrefixInString('~/some/path');
+    expect(withoutRootPathPrefix).to.be.false;
+    expect(withRootPathPrefix).to.be.true;
+  });
+
+  it('check if "common" is at the beginning of the string', () => {
+    const withoutRootPathPrefix = hasRootPathPrefixInString('some/path', 'common');
+    const withRootPathPrefix = hasRootPathPrefixInString('common/some/path', 'common');
     expect(withoutRootPathPrefix).to.be.false;
     expect(withRootPathPrefix).to.be.true;
   });
