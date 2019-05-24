@@ -10,10 +10,16 @@ Babel plugin to add the opportunity to use `import` and `require` with root base
 // Without this plugin...
 import SomeExample from '../../../some/example.js';
 const OtherExample = require('../../../other/example.js');
+import('../../../other/dynamic').then(mod => {
+  // ...
+});
 
 // With babel-plugin-root-import you can write...
 import SomeExample from '~/some/example.js';
 const OtherExample = require('~/other/example.js');
+import('~/other/dynamic').then(mod => {
+  // ...
+});
 ```
 
 ## Install
