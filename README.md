@@ -73,11 +73,34 @@ the plugins array. Here's an example with the default config.
       "babel-plugin-root-import",
       {
         "rootPathSuffix": "./",
-        "rootPathPrefix": "~"
+        "rootPathPrefix": "~/"
       }
     ]
   ],
 ```
+
+Multiple rules may be specified by creating an object with `{ "paths": [firstItem, secondItem] }`, e.g.
+
+```javascript
+  "plugins": [
+    [
+      "babel-plugin-root-import",
+      {
+        "paths": [
+          {
+            "rootPathSuffix": "./src/components",
+            "rootPathPrefix": "~/"
+          },
+          {
+            "rootPathSuffix": "./src/utils",
+            "rootPathPrefix": "!/"
+          },
+        ]
+      }
+    ]
+  ],
+```
+
 
 ### Custom rootPathSuffix
 
@@ -96,7 +119,7 @@ paths like `~/src/foo.js`. You can change the prefix of `"./"` to e.g.
 }
 ```
 
-The paths `"src/js"` and `"./src/js"` behave the same. 
+The paths `"src/js"` and `"./src/js"` behave the same.
 
 ### Custom rootPathPrefix
 
@@ -105,12 +128,12 @@ If you don't like the `~` syntax you can use your own symbol (for example an `#`
 it's very unlikely to conflict with anything (and wouldn't be expanded to HOME anyway).
 
 ```javascript
-// 
+//
 // Waiting this change: https://github.com/entwicklerstube/babel-plugin-root-import/pull/97
-{ 
+{
   "plugins": [
     ["babel-plugin-root-import", {
-      "rootPathPrefix": "#"
+      "rootPathPrefix": "#/"
     }]
   ]
 }
@@ -131,14 +154,14 @@ You can supply an array of the above. The plugin will try each prefix/suffix pai
   "plugins": [
     ["babel-plugin-root-import", [{
         // `~` is the default so you can remove this if you want
-        "rootPathPrefix": "~",
+        "rootPathPrefix": "~/",
         "rootPathSuffix": "src/js"
       }, {
-        "rootPathPrefix": "@",
+        "rootPathPrefix": "@/",
         "rootPathSuffix": "other-src/js"
       }, {
         // since we suport relative paths you can also go into a parent directory
-        "rootPathPrefix": "#",
+        "rootPathPrefix": "#/",
         "rootPathSuffix": "../../src/in/parent"
       }]
     ]
@@ -162,7 +185,7 @@ If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-imp
 
 ### Don't let Flow be confused
 
-If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is necessary to instruct it on how to map your chosen prefix to the root directory. Add the following to your `.flowconfig` file, replacing `{rootPathPrefix}` with your chosen prefix and `{rootPathSuffix}` with your chosen suffix.
+If you use Facebook's [Flow](https://flowtype.org/) for type-checking it is necessary to instruct it on how to map your chosen prefix to the root directory. Add the following to your `.flowconfig` file, replacing `{rootPathPrefix}` with your chosen prefix (minus a trailing slash if any) and `{rootPathSuffix}` with your chosen suffix.
 ```
 [options]
 module.name_mapper='^{rootPathPrefix}/\(.*\)$' -> '<PROJECT_ROOT>/{rootPathSuffix}/\1'
