@@ -175,12 +175,12 @@ const bar = require('@/bar');
 
 ### Don't let ESLint be confused
 
-If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-babel-plugin-root-import](https://github.com/bingqichen/eslint-import-resolver-babel-plugin-root-import)
+If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-root-import](https://github.com/diego3g/eslint-import-resolver-root-import).
 
 ```json
-    "import/resolver": {
-      "babel-plugin-root-import": {}
-    }
+"import/resolver": {
+  "root-import": {}
+}
 ```
 
 ### Don't let Flow be confused
