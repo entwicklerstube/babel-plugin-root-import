@@ -26,9 +26,13 @@ import('~/other/dynamic').then(mod => {
 
 Install with your package manager of choice.
 
-```
+```sh
 npm install babel-plugin-root-import --save-dev
-# or
+```
+
+or
+
+```sh
 yarn add babel-plugin-root-import --dev
 ```
 
