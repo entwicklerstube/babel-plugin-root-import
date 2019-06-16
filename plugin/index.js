@@ -1,13 +1,9 @@
-import slash from 'slash';
-
 import {hasRootPathPrefixInString, transformRelativeToRootPath} from './helper';
+import CallExpressionTester from './call-expression-tester';
 
 const replacePrefix = (path, opts = [], sourceFile) => {
-  if ('paths' in opts) {
-      opts = opts['paths'];
-  }
-
-  const options = [].concat(opts);
+  const paths = 'paths' in opts ? opts.paths : opts;
+  const options = [].concat(paths);
 
   for (let i = 0; i < options.length; i++) {
     let rootPathSuffix = '';
@@ -24,7 +20,7 @@ const replacePrefix = (path, opts = [], sourceFile) => {
     }
 
     if (hasRootPathPrefixInString(path, rootPathPrefix)) {
-      return transformRelativeToRootPath(path, rootPathSuffix, rootPathPrefix, slash(sourceFile));
+      return transformRelativeToRootPath(path, rootPathSuffix, rootPathPrefix, sourceFile);
     }
   }
 
@@ -50,9 +46,10 @@ const traverseExpression = (t, arg) => {
 };
 
 export default ({ 'types': t }) => {
+  let callExpressionTester;
   const visitor = {
     CallExpression(path, state) {
-      if (!(path.node.callee.name === 'require' || t.isImport(path.node.callee))) {
+      if (!callExpressionTester.test(path)) {
         return;
       }
 
@@ -84,6 +81,7 @@ export default ({ 'types': t }) => {
   return {
     'visitor': {
       Program(path, state) {
+        callExpressionTester = new CallExpressionTester(t, state.opts);
         path.traverse(visitor, state);
       }
     }

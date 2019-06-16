@@ -6,7 +6,8 @@ export const hasRootPathPrefixInString = (importPath, rootPathPrefix = '~') => {
   return !!(typeof importPath === 'string' && importPath.indexOf(rootPathPrefix) === 0);
 };
 
-export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPathPrefix, sourceFile = '') => {
+export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPathPrefix, srcFile = '') => {
+  const sourceFile = slash(srcFile);
   if (hasRootPathPrefixInString(importPath, rootPathPrefix)) {
     const withoutRootPathPrefix = importPath.replace(rootPathPrefix, '');
 
