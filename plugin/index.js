@@ -4,7 +4,7 @@ import {hasRootPathPrefixInString, transformRelativeToRootPath} from './helper';
 
 const replacePrefix = (path, opts = [], sourceFile) => {
   if ('paths' in opts) {
-      opts = opts['paths'];
+    opts = opts['paths'];
   }
 
   const options = [].concat(opts);
@@ -24,7 +24,7 @@ const replacePrefix = (path, opts = [], sourceFile) => {
     }
 
     if (hasRootPathPrefixInString(path, rootPathPrefix)) {
-      return transformRelativeToRootPath(path, rootPathSuffix, rootPathPrefix, slash(sourceFile));
+      return transformRelativeToRootPath(path, rootPathSuffix, rootPathPrefix, slash(sourceFile), option.root || undefined);
     }
   }
 
