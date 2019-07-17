@@ -14,6 +14,19 @@ describe('helper#transformRelativeToRootPath', () => {
     expect(result).to.equal(rootPath);
   });
 
+  it('supports custom root', () => {
+    const rootPath = slash('../../some/path');
+    const parent = path.resolve('../');
+    const result = transformRelativeToRootPath('~/some/path', '', '~', 'some/file.js', parent);
+    expect(result).to.equal(rootPath);
+  });
+
+  it('supports custom root function', () => {
+    const rootPath = slash('./internals/foo');
+    const result = transformRelativeToRootPath('~/foo', 'internals', '~', 'some/file.js', source => path.dirname(path.resolve(source)));
+    expect(result).to.equal(rootPath);
+  });
+
   it('considers .. in relative path', () => {
     const result = transformRelativeToRootPath('~/util', '../shared', '~', 'test.js');
     expect(result).to.not.equal(`${path.resolve('../shared')}/util/test.js`);

@@ -127,13 +127,11 @@ The paths `"src/js"` and `"./src/js"` behave the same.
 
 ### Custom rootPathPrefix
 
-If you don't like the `~` syntax you can use your own symbol (for example an `#` symbol or `\` or anything you want). Using
-`@` is not recommended, as recent versions of NPM allow `@` in package names. `~` is the default since
-it's very unlikely to conflict with anything (and wouldn't be expanded to HOME anyway).
+If you don't like the `~` syntax you can use your own symbol (for example an `#` symbol or `\` or anything you want). Using `@` is not recommended as NPM allows `@` in package
+names. `~` is the default since it's very unlikely to conflict with anything (and
+wouldn't be expanded to HOME anyway).
 
 ```javascript
-//
-// Waiting this change: https://github.com/entwicklerstube/babel-plugin-root-import/pull/97
 {
   "plugins": [
     ["babel-plugin-root-import", {
@@ -142,40 +140,88 @@ it's very unlikely to conflict with anything (and wouldn't be expanded to HOME a
   ]
 }
 
-// Now you can use the plugin like either of these
-import foo from '#my-file';
+// Now you can use the plugin like this
 import foo from '#/my-file';
 ```
 
 If you set it to e.g. `"#/"` then it'll require the slash in the import path.
 
-### Multiple custom prefixes and suffixes
+### Custom root
 
-You can supply an array of the above. The plugin will try each prefix/suffix pair in the order they are defined.
+By default everything is resolved relative to the current working directory. You can
+change this with the `root` config option. To use it effectively, you'll need to
+configure babel with one of the JavaScript config file variants, rather than JSON.
 
-```javascript
-{
-  "plugins": [
-    ["babel-plugin-root-import", [{
-        // `~` is the default so you can remove this if you want
-        "rootPathPrefix": "~/",
-        "rootPathSuffix": "src/js"
-      }, {
-        "rootPathPrefix": "@/",
-        "rootPathSuffix": "other-src/js"
-      }, {
-        // since we suport relative paths you can also go into a parent directory
-        "rootPathPrefix": "#/",
-        "rootPathSuffix": "../../src/in/parent"
-      }]
-    ]
-  ]
-}
+For example, the following `.babelrc.js` file causes imports to resolve relative to
+the directory `.babelrc.js` is in.
 
-// Now you can use the plugin like:
-import foo from '~/foo';
-const bar = require('@/bar');
+```js
+const rootImportOpts = {
+  root: __dirname,
+  rootPathPrefix: "~/",
+  rootPathSuffix: "src/js",
+};
+
+module.exports = {
+  plugins: [
+    ['babel-plugin-root-import', rootImportOpts],
+  ],
+};
 ```
+
+<details>
+
+<summary>
+
+`babel.config.js`
+
+</summary>
+
+```js
+const rootImportOpts = {
+  root: __dirname,
+  rootPathPrefix: "~/",
+  rootPathSuffix: "src/js",
+};
+
+module.exports = (api) => {
+  api.cache(true);
+
+  const plugins = [
+    ['babel-plugin-root-import', rootImportOpts],
+  ];
+
+  return { plugins };
+};
+```
+
+</details>
+
+<details>
+
+<summary>
+
+Function root variant
+
+</summary>
+
+This `.babelrc.js` aliases `@/foo` to `./internals/foo.js` since it's always relative to the file doing the import (contrived example).
+
+```js
+const rootImportOpts = {
+  root: (sourcePath) => path.dirname(sourcePath),
+  rootPathPrefix: "@/",
+  rootPathSuffix: "internals",
+};
+
+module.exports = {
+  plugins: [
+    ['babel-plugin-root-import', rootImportOpts],
+  ],
+};
+```
+
+</details>
 
 ### Don't let ESLint be confused
 
@@ -186,6 +232,7 @@ If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-imp
       "babel-plugin-root-import": {}
     }
 ```
+
 
 ### Don't let Flow be confused
 
@@ -233,6 +280,10 @@ Webpack delivers a similar feature, if you just want to prevent end-less import 
 Sometimes tooling might not be up to scratch, meaning you lose features such as navigation in your IDE. In such cases you might want to revert back to using relative paths again. If you have a significant amount of files, it might be worth looking into [tooling](https://www.npmjs.com/package/convert-root-import) to help you with the conversion.
 
 ## Change Log
+
+#### 6.3.0 - 2019-07-17
+
+Adds 'root' config option.
 
 #### 6.2.0 - 2019-05-09
 
