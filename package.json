@@ -11,7 +11,9 @@
   ],
   "repository": "entwicklerstube/babel-plugin-root-import",
   "scripts": {
-    "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
+    "test": "npm run test-babel6; npm run test-babel7",
+    "test-babel6": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
+    "test-babel7": "mocha test/*.spec.js --require config/mocha.js --require test/set-babel7.js --compilers js:babel-core/register",
     "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register --watch",
     "lint-js": "eslint plugin",
     "compile": "babel -d build/ plugin/",
@@ -23,9 +25,12 @@
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
     "babel-cli": "^6.10.1",
     "babel-core": "^6.2.1",
     "babel-eslint": "^5.0.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-stage-1": "^6.1.18",
     "chai": "^3.2.0",

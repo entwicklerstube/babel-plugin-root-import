@@ -223,6 +223,25 @@ module.exports = {
 
 </details>
 
+### Transform paths for custom functions
+
+If you have the need to transform paths also for other function calls you can configure them.
+But please be aware that this is kind of error prone because custom function names in Javascript are not static and can differ.
+
+```javascript
+{
+  "plugins": [
+    ["babel-plugin-root-import", {
+      "functions": ["jest.mock"]
+    }]
+  ]
+}
+
+// Now you can use the plugin also for jest.mock calls:
+jest.mock('~/myfile')
+```
+
+
 ### Don't let ESLint be confused
 
 If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import) to validate imports it may be necessary to instruct ESLint to parse root imports. You can use [eslint-import-resolver-babel-plugin-root-import](https://github.com/bingqichen/eslint-import-resolver-babel-plugin-root-import)
@@ -280,6 +299,12 @@ Webpack delivers a similar feature, if you just want to prevent end-less import 
 Sometimes tooling might not be up to scratch, meaning you lose features such as navigation in your IDE. In such cases you might want to revert back to using relative paths again. If you have a significant amount of files, it might be worth looking into [tooling](https://www.npmjs.com/package/convert-root-import) to help you with the conversion.
 
 ## Change Log
+
+#### 6.4.0 - 2019-XX-XX
+
+- add support for require.resolve
+- add support to configure additional functions
+
 
 #### 6.3.0 - 2019-07-17
 

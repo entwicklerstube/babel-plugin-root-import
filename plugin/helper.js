@@ -6,14 +6,13 @@ export const hasRootPathPrefixInString = (importPath, rootPathPrefix = '~') => {
   return !!(typeof importPath === 'string' && importPath.indexOf(rootPathPrefix) === 0);
 };
 
-export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPathPrefix, sourceFile = '', root = defaultRoot) => {
+export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPathPrefix, _sourceFile = '', _root = defaultRoot) => {
+  const sourceFile = slash(_sourceFile);
   if (hasRootPathPrefixInString(importPath, rootPathPrefix)) {
     const withoutRootPathPrefix = importPath.replace(rootPathPrefix, '');
 
     const suffix = rootPathSuffix ? rootPathSuffix : './';
-    if (typeof root === 'function') {
-      root = root(sourceFile);
-    }
+    const root = typeof _root === 'function' ? _root(sourceFile) : _root;
     const absolutePath = path.resolve(root, `${suffix}/${withoutRootPathPrefix}`);
 
     let sourcePath = sourceFile.substring(0, sourceFile.lastIndexOf('/'));
