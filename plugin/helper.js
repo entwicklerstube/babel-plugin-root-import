@@ -3,10 +3,18 @@ import path from 'path';
 const defaultRoot = slash(global.rootPath || process.cwd());
 
 export const hasRootPathPrefixInString = (importPath, rootPathPrefix = '~') => {
-  return !!(typeof importPath === 'string' && importPath.indexOf(rootPathPrefix) === 0);
+  return !!(
+    typeof importPath === 'string' && importPath.indexOf(rootPathPrefix) === 0
+  );
 };
 
-export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPathPrefix, _sourceFile = '', _root = defaultRoot) => {
+export const transformRelativeToRootPath = (
+  importPath,
+  rootPathSuffix,
+  rootPathPrefix,
+  _sourceFile = '',
+  _root = defaultRoot,
+) => {
   const sourceFile = slash(_sourceFile);
   if (hasRootPathPrefixInString(importPath, rootPathPrefix)) {
     const withoutRootPathPrefix = importPath.replace(rootPathPrefix, '');
@@ -18,7 +26,11 @@ export const transformRelativeToRootPath = (importPath, rootPathSuffix, rootPath
     let sourcePath = sourceFile.substring(0, sourceFile.lastIndexOf('/'));
 
     // if the path is an absolute path (webpack sends '/Users/foo/bar/baz.js' here)
-    if (sourcePath.indexOf('/') === 0 || sourcePath.indexOf(':/') === 1 || sourcePath.indexOf(':\\') === 1) {
+    if (
+      sourcePath.indexOf('/') === 0 ||
+      sourcePath.indexOf(':/') === 1 ||
+      sourcePath.indexOf(':\\') === 1
+    ) {
       sourcePath = sourcePath.substring(root.length + 1);
     }
 

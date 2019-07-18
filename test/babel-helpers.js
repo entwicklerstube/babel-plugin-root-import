@@ -13,7 +13,8 @@ if (process.env.BABEL_VERSION === '7') {
   const babel = require('babel-core');
   babelTypes = require('babel-types');
   importSyntaxPlugin = 'syntax-dynamic-import';
-  parseToBody = (code, opts = {}) => babel.transform(code, { 'ast': true, 'code': false, ...opts} ).ast.program.body;
+  parseToBody = (code, opts = {}) =>
+    babel.transform(code, { ast: true, code: false, ...opts }).ast.program.body;
   babelTransform = babel.transform;
 }
 

@@ -17,9 +17,14 @@ export default class CallExpressionTester {
   }
 
   test(path) {
-    const { 'node': { callee } } = path;
+    const {
+      node: { callee },
+    } = path;
 
-    if (this.types.isIdentifier(callee) && this.simpleFunctions.includes(callee.name)) {
+    if (
+      this.types.isIdentifier(callee) &&
+      this.simpleFunctions.includes(callee.name)
+    ) {
       return true;
     }
 
@@ -27,7 +32,9 @@ export default class CallExpressionTester {
       return true;
     }
 
-    return this.types.isMemberExpression(path.node.callee)
-      && this.memberFunctions.includes(`${callee.object.name}.${callee.property.name}`);
+    return (
+      this.types.isMemberExpression(path.node.callee) &&
+      this.memberFunctions.includes(`${callee.object.name}.${callee.property.name}`)
+    );
   }
 }

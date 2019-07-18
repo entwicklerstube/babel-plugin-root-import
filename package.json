@@ -15,7 +15,10 @@
     "test-babel6": "mocha test/*.spec.js --require babel-core/register --require config/mocha.js",
     "test-babel7": "mocha test/*.spec.js --require babel-core/register --require config/mocha.js --require test/set-babel7.js ",
     "test-watch": "mocha test/*.spec.js --require babel-core/register --require config/mocha.js --watch",
-    "lint-js": "eslint plugin",
+    "lint-js": "eslint plugin && npm run format-check",
+    "format": "npm run prettier-internal -- --write",
+    "format-check": "npm run prettier-internal -- --check",
+    "prettier-internal": "prettier 'plugin/*.js' README.md 'config/*.js' .eslintrc package.json 'test/**/*.js'",
     "compile": "babel -d build/ plugin/",
     "prepublish": "npm run test && npm run compile"
   },
@@ -36,6 +39,7 @@
     "chai": "^4.2.0",
     "eslint": "~6.0.1",
     "mocha": "^6.1.4",
+    "prettier": "1.18.2",
     "sinon": "^7.3.2"
   }
 }

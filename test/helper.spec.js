@@ -1,4 +1,7 @@
-import {hasRootPathPrefixInString, transformRelativeToRootPath} from '../plugin/helper';
+import {
+  hasRootPathPrefixInString,
+  transformRelativeToRootPath,
+} from '../plugin/helper';
 import slash from 'slash';
 import path from 'path';
 
@@ -10,20 +13,37 @@ describe('helper#transformRelativeToRootPath', () => {
 
   it('transforms given path relative path', () => {
     const rootPath = slash('./path');
-    const result = transformRelativeToRootPath('~/some/path', '', '~', 'some/file.js');
+    const result = transformRelativeToRootPath(
+      '~/some/path',
+      '',
+      '~',
+      'some/file.js',
+    );
     expect(result).to.equal(rootPath);
   });
 
   it('supports custom root', () => {
     const rootPath = slash('../../some/path');
     const parent = path.resolve('../');
-    const result = transformRelativeToRootPath('~/some/path', '', '~', 'some/file.js', parent);
+    const result = transformRelativeToRootPath(
+      '~/some/path',
+      '',
+      '~',
+      'some/file.js',
+      parent,
+    );
     expect(result).to.equal(rootPath);
   });
 
   it('supports custom root function', () => {
     const rootPath = slash('./internals/foo');
-    const result = transformRelativeToRootPath('~/foo', 'internals', '~', 'some/file.js', source => path.dirname(path.resolve(source)));
+    const result = transformRelativeToRootPath(
+      '~/foo',
+      'internals',
+      '~',
+      'some/file.js',
+      (source) => path.dirname(path.resolve(source)),
+    );
     expect(result).to.equal(rootPath);
   });
 
@@ -33,18 +53,35 @@ describe('helper#transformRelativeToRootPath', () => {
   });
 
   it('considers multiple .. in relative path', () => {
-    const result = transformRelativeToRootPath('~/util', '../../../shared', '~', 'test.js');
+    const result = transformRelativeToRootPath(
+      '~/util',
+      '../../../shared',
+      '~',
+      'test.js',
+    );
     expect(result).to.not.equal(`${path.resolve('../../../shared')}/util/test.js`);
   });
 
   it('stops adding .. after the first one has been reached', () => {
-    const result = transformRelativeToRootPath('~/util', '../shared/test/../test', '~', 'test.js');
-    expect(result).to.not.equal(`${path.resolve('../shared')}/util/test/../test/test.js`);
+    const result = transformRelativeToRootPath(
+      '~/util',
+      '../shared/test/../test',
+      '~',
+      'test.js',
+    );
+    expect(result).to.not.equal(
+      `${path.resolve('../shared')}/util/test/../test/test.js`,
+    );
   });
 
   it('works with long prefix and special characters', () => {
     const rootPath = slash('./path');
-    const result = transformRelativeToRootPath('common$^plop/some/path', '', 'common$^plop', 'some/file.js');
+    const result = transformRelativeToRootPath(
+      'common$^plop/some/path',
+      '',
+      'common$^plop',
+      'some/file.js',
+    );
     expect(result).to.equal(rootPath);
   });
 
@@ -70,7 +107,10 @@ describe('helper#hasRootPathPrefixInString', () => {
 
   it('check if "common" is at the beginning of the string', () => {
     const withoutRootPathPrefix = hasRootPathPrefixInString('some/path', 'common');
-    const withRootPathPrefix = hasRootPathPrefixInString('common/some/path', 'common');
+    const withRootPathPrefix = hasRootPathPrefixInString(
+      'common/some/path',
+      'common',
+    );
     expect(withoutRootPathPrefix).to.be.false;
     expect(withRootPathPrefix).to.be.true;
   });
