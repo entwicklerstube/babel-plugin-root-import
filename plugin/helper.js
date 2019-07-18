@@ -36,7 +36,7 @@ export const transformRelativeToRootPath = (
 
     sourcePath = path.resolve(sourcePath);
 
-    let relativePath = slash(path.relative(sourcePath, absolutePath));
+    let relativePath = path.relative(sourcePath, absolutePath).replace(/\\/g, '/');
 
     // if file is located in the same folder
     if (relativePath.indexOf('../') !== 0) {
