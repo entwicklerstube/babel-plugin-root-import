@@ -244,9 +244,24 @@ can use
 [eslint-import-resolver-babel-plugin-root-import](https://github.com/bingqichen/eslint-import-resolver-babel-plugin-root-import)
 
 ```json
+  "settings": {
     "import/resolver": {
       "babel-plugin-root-import": {}
     }
+  }
+```
+
+You may also specify a prefix/suffix if it doesn't correctly find your babel config.
+
+```json
+  "settings": {
+    "import/resolver": {
+      "babel-plugin-root-import": {
+        "rootPathPrefix": "~",
+        "rootPathSuffix": "src"
+      }
+    }
+  }
 ```
 
 ### Don't let Flow be confused
@@ -307,6 +322,10 @@ paths again. If you have a significant amount of files, it might be worth lookin
 conversion.
 
 ## Change Log
+
+#### 6.4.1 - 2019-07-18
+
+- fixes unicode paths on windows
 
 #### 6.4.0 - 2019-07-18
 
