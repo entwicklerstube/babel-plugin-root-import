@@ -300,10 +300,10 @@ Sometimes tooling might not be up to scratch, meaning you lose features such as 
 
 ## Change Log
 
-#### 6.4.0 - 2019-XX-XX
+#### 6.4.0 - 2019-07-18
 
 - add support for require.resolve
-- add support to configure additional functions
+- add support to configure additional require-like functions
 
 
 #### 6.3.0 - 2019-07-17
