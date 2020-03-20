@@ -35,6 +35,25 @@ describe('helper#transformRelativeToRootPath', () => {
     expect(result).to.equal(rootPath);
   });
 
+  it('supports an absolute custom root path', () => {
+    const importPath = '~/another/path';
+    const root = '/root-directory';
+
+    // The file is 2 directories down the custom root.
+    const file = '/root-directory/some/path/file.js';
+    
+    const result = transformRelativeToRootPath(
+      importPath,
+      '',
+      '~/',
+      file,
+      root
+    );
+
+    expect(result).to.equal('../../another/path')
+  });
+
+
   it('supports custom root function', () => {
     const rootPath = slash('./internals/foo');
     const result = transformRelativeToRootPath(
