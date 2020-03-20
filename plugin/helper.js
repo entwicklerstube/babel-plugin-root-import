@@ -25,18 +25,7 @@ export const transformRelativeToRootPath = (
 
     let sourcePath = sourceFile.substring(0, sourceFile.lastIndexOf('/'));
 
-    // if the path is an absolute path (webpack sends '/Users/foo/bar/baz.js' here)
-    if (
-      sourcePath.indexOf('/') === 0 ||
-      sourcePath.indexOf(':/') === 1 ||
-      sourcePath.indexOf(':\\') === 1
-    ) {
-      sourcePath = sourcePath.substring(root.length + 1);
-    }
-
-    sourcePath = path.resolve(sourcePath);
-
-    let relativePath = path.relative(sourcePath, absolutePath).replace(/\\/g, '/');
+    let relativePath = path.relative(path.resolve(sourcePath), absolutePath).replace(/\\/g, '/');
 
     // if file is located in the same folder
     if (relativePath.indexOf('../') !== 0) {
