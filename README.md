@@ -241,7 +241,7 @@ jest.mock('~/myfile')
 If you use [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import)
 to validate imports it may be necessary to instruct ESLint to parse root imports. You
 can use
-[eslint-import-resolver-babel-plugin-root-import](https://github.com/bingqichen/eslint-import-resolver-babel-plugin-root-import)
+[eslint-import-resolver-babel-plugin-root-import](https://github.com/unconfident/eslint-import-resolver-babel-plugin-root-import)
 
 ```json
   "settings": {
