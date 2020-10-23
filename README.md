@@ -323,6 +323,10 @@ conversion.
 
 ## Change Log
 
+#### 6.6.0 - 2020-10-23
+
+- support template literals in dynamic import/require
+
 #### 6.4.1 - 2019-07-18
 
 - fixes unicode paths on windows
