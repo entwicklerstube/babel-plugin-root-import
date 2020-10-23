@@ -33,6 +33,23 @@ const replacePrefix = (path, opts = [], sourceFile) => {
   return path;
 };
 
+const replacePrefixStrOrQuasi = (node, opts, sourceFile) => {
+  // String literal
+  if (typeof node === 'string') {
+    return replacePrefix(node, opts, sourceFile);
+  }
+  // Template literal quasi
+  else if (node && typeof node.cooked === 'string') {
+    return {
+      ...node,
+      cooked: replacePrefix(node.cooked, opts, sourceFile),
+      raw: replacePrefix(node.raw, opts, sourceFile),
+    };
+  } else {
+    return node;
+  }
+};
+
 /**
  * Recursively traverses binary  expressions to find the first `StringLiteral` if any.
  * @param  {Object} t           Babel types
@@ -40,6 +57,10 @@ const replacePrefix = (path, opts = [], sourceFile) => {
  * @return {StringLiteral?}
  */
 const traverseExpression = (t, arg) => {
+  if (t.isTemplateLiteral(arg)) {
+    return arg.quasis[0];
+  }
+
   if (t.isStringLiteral(arg)) {
     return arg;
   }
@@ -67,7 +88,7 @@ export default ({ types: t }) => {
       const firstArg = traverseExpression(t, args[0]);
 
       if (firstArg) {
-        firstArg.value = replacePrefix(
+        firstArg.value = replacePrefixStrOrQuasi(
           firstArg.value,
           state.opts,
           state.file.opts.filename,

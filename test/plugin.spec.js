@@ -31,13 +31,22 @@ describe('Babel Root Import - Plugin', () => {
   });
 
   it('transforms for import() syntax', () => {
-    const targetRequire = slash(`/some/example.js`);
+    const targetRequire = slash(`'./some/example.js'`);
     const transformed = babelTransform(
       "var SomeExample = import('~/some/example.js');",
       {
         plugins: [importSyntaxPlugin, BabelRootImportPlugin],
       },
     );
+
+    expect(transformed.code).to.contain(targetRequire);
+  });
+
+  it('transforms for import() syntax with template literal', () => {
+    const targetRequire = slash('`./some/${foo}`');
+    const transformed = babelTransform('var SomeExample = import(`~/some/${foo}`);', {
+      plugins: [importSyntaxPlugin, BabelRootImportPlugin],
+    });
 
     expect(transformed.code).to.contain(targetRequire);
   });
